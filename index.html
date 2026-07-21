@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#376c5b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Compass">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <title>Compass Cashflow</title>
+  <style>
+    :root{
+      --bg:#f3efe7;--card:#fffdf9;--ink:#24312c;--muted:#6b746f;
+      --line:#d8ddd8;--accent:#376c5b;--accent-soft:#e3eee8;
+      --danger:#a14545;--warning:#9b6a2d;--shadow:0 12px 30px rgba(35,49,44,.08)
+    }
+    *{box-sizing:border-box}
+    html{background:var(--bg)}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+    .app{max-width:860px;margin:auto;padding:18px 14px calc(96px + env(safe-area-inset-bottom))}
+    header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+    h1{margin:2px 0 0;font-size:38px;letter-spacing:-.045em}
+    h2{font-size:19px;margin:0}
+    .eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:12px;font-weight:800}
+    .sub{font-size:13px;color:var(--muted);margin-top:5px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:12px;box-shadow:var(--shadow)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .metric{font-size:29px;font-weight:850;letter-spacing:-.035em;margin-top:4px}
+    .small{font-size:12px;color:var(--muted)}
+    .section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+    button{border:1px solid var(--line);background:white;color:var(--ink);border-radius:12px;padding:10px 12px;font:inherit;cursor:pointer}
+    button.primary{background:var(--accent);border-color:var(--accent);color:white}
+    button.danger{color:var(--danger)}
+    input,select{width:100%;border:1px solid var(--line);background:white;border-radius:10px;padding:10px;font:inherit}
+    label{font-size:12px;font-weight:700;color:var(--muted)}
+    label span{display:block;margin-bottom:5px}
+    .pot-row,.tx-row{display:grid;gap:8px;align-items:end;padding:11px 0;border-bottom:1px solid var(--line)}
+    .pot-row{grid-template-columns:1.5fr .8fr .8fr .8fr auto}
+    .tx-row{grid-template-columns:.9fr 1.5fr .75fr .8fr .9fr auto}
+    .pot-row:last-child,.tx-row:last-child{border-bottom:0}
+    .readonly{padding:10px 0;font-weight:800;text-align:right;white-space:nowrap}
+    .in{color:var(--accent)}
+    .out{color:var(--danger)}
+    .summaryline{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid var(--line)}
+    .summaryline:last-child{border-bottom:0}
+    .big-total{font-size:27px;font-weight:850}
+    .help{background:#f7f4ed;border-radius:12px;padding:12px 13px;font-size:13px;color:var(--muted);line-height:1.45;margin-top:12px}
+    .negative{color:var(--danger)!important}
+    .tabbar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,253,249,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;justify-content:center;gap:8px;z-index:20}
+    .tabbar button{flex:1;max-width:230px}
+    .hidden{display:none}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap}
+    @media(max-width:700px){
+      .grid{grid-template-columns:1fr}
+      h1{font-size:34px}
+      .pot-row,.tx-row{grid-template-columns:1fr 1fr}
+      .pot-row .wide,.tx-row .wide{grid-column:1/-1}
+      .pot-row .readonly,.tx-row .readonly{text-align:left;padding:0 0 4px}
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div>
+      <span class="eyebrow">Compass</span>
+      <h1>Your cashflow</h1>
+      <div class="sub">Protected pots, real payments, and the money left.</div>
+    </div>
+    <button onclick="exportData()">Backup</button>
+  </header>
+
+  <section id="dashboard">
+    <div class="grid">
+      <div class="card">
+        <div class="small">Cash now</div>
+        <div id="cashNow" class="metric">0 DKK</div>
+      </div>
+      <div class="card">
+        <div class="small">Protected in pots</div>
+        <div id="protectedNow" class="metric">0 DKK</div>
+      </div>
+      <div class="card">
+        <div class="small">Free now</div>
+        <div id="freeNow" class="metric">0 DKK</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <label><span>Current cash in your accounts</span><input id="currentCash" type="number" step="0.01"></label>
+    </div>
+
+    <div class="card">
+      <div class="section-head">
+        <h2>Protected pots</h2>
+        <button class="primary" onclick="addPot()">Add pot</button>
+      </div>
+      <div id="pots"></div>
+      <div class="help">A pot reserves money that remains in your bank. Removing a pot instantly releases that amount into “Free now.” Spending belongs in cashflow only when money actually leaves the account.</div>
+    </div>
+
+    <div class="card">
+      <div class="section-head">
+        <h2>Cashflow by date</h2>
+        <button class="primary" onclick="addTransaction()">Add payment</button>
+      </div>
+      <div id="transactions"></div>
+      <div class="help">The running balance follows real money in and out. Protected pots stay separate, so travel and food each count once.</div>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-bottom:8px">Overall view</h2>
+      <div class="summaryline"><span>Current cash</span><strong id="sumCash">0 DKK</strong></div>
+      <div class="summaryline"><span>Future money in</span><strong id="sumIn">0 DKK</strong></div>
+      <div class="summaryline"><span>Future money out</span><strong id="sumOut">0 DKK</strong></div>
+      <div class="summaryline"><span>Protected pots remaining</span><strong id="sumPots">0 DKK</strong></div>
+      <div class="summaryline big-total"><span>Left after everything entered</span><span id="sumLeft">0 DKK</span></div>
+    </div>
+  </section>
+
+  <section id="settings" class="hidden">
+    <div class="card">
+      <h2 style="margin-bottom:8px">Backup and restore</h2>
+      <div class="toolbar">
+        <button onclick="exportData()">Export backup</button>
+        <label style="display:inline-block">
+          <input id="importFile" type="file" accept=".json" style="display:none">
+          <span style="display:inline-block;border:1px solid var(--line);background:white;color:var(--ink);border-radius:12px;padding:10px 12px;cursor:pointer">Import backup</span>
+        </label>
+        <button class="danger" onclick="resetData()">Reset to current plan</button>
+      </div>
+      <div class="help">The app saves automatically in this browser. A backup protects your numbers when moving phones or clearing browser data.</div>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-bottom:8px">Install on your phone</h2>
+      <div class="help">After the site is hosted, open it in Safari or Chrome and choose “Add to Home Screen.” Compass then opens from its own icon and works offline after the first visit.</div>
+    </div>
+  </section>
+</div>
+
+<div class="tabbar">
+  <button id="dashBtn" class="primary" onclick="showTab('dashboard')">Compass</button>
+  <button id="settingsBtn" onclick="showTab('settings')">Settings</button>
+</div>
+
+<script>
+const INITIAL = {
+  currentCash: 17303.52,
+  pots: [
+    {name:"Food until 12 August", total:5814.52, used:0},
+    {name:"Liam", total:600, used:229},
+    {name:"Norah allowance", total:700, used:100},
+    {name:"Travel pot", total:5000, used:0}
+  ],
+  transactions: [
+    {date:"2026-07-25", name:"Nordic Culture Fund", type:"in", amount:5000},
+    {date:"2026-07-25", name:"First rent", type:"out", amount:13000},
+    {date:"2026-08-12", name:"UiT salary", type:"in", amount:22500},
+    {date:"2026-08-12", name:"Second rent", type:"out", amount:12000},
+    {date:"2026-08-15", name:"Reimbursement", type:"in", amount:2000},
+    {date:"2026-08-15", name:"Norah school", type:"out", amount:2750},
+    {date:"2026-08-15", name:"Furniture", type:"out", amount:2500}
+  ],
+  notes: {
+    todaysSpending: 952,
+    breakdown: "Liam 229, Norah 100, general 200, food/café/cultural 418, transport 5"
+  }
+};
+
+const clone = obj => JSON.parse(JSON.stringify(obj));
+let state;
+try {
+  state = JSON.parse(localStorage.getItem("compassFullPWA")) || clone(INITIAL);
+} catch {
+  state = clone(INITIAL);
+}
+
+const fmt = n => new Intl.NumberFormat("da-DK", {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+}).format(Number(n || 0)) + " DKK";
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+}[c]));
+
+function save(){
+  localStorage.setItem("compassFullPWA", JSON.stringify(state));
+}
+
+function render(){
+  document.getElementById("currentCash").value = state.currentCash;
+  renderPots();
+  renderTransactions();
+  renderSummary();
+  save();
+}
+
+function renderPots(){
+  const wrap = document.getElementById("pots");
+  wrap.innerHTML = "";
+  state.pots.forEach((p,i) => {
+    const remaining = Math.max(0, Number(p.total||0) - Number(p.used||0));
+    const row = document.createElement("div");
+    row.className = "pot-row";
+    row.innerHTML = `
+      <label class="wide"><span>Pot</span><input value="${esc(p.name)}" onchange="updatePot(${i},'name',this.value)"></label>
+      <label><span>Total</span><input type="number" step="0.01" value="${p.total}" onchange="updatePot(${i},'total',this.value)"></label>
+      <label><span>Used</span><input type="number" step="0.01" value="${p.used}" onchange="updatePot(${i},'used',this.value)"></label>
+      <div><span class="small">Remaining</span><div class="readonly">${fmt(remaining)}</div></div>
+      <button class="danger" onclick="removePot(${i})">Remove</button>
+    `;
+    wrap.appendChild(row);
+  });
+}
+
+function renderTransactions(){
+  state.transactions.sort((a,b) => a.date.localeCompare(b.date));
+  const wrap = document.getElementById("transactions");
+  wrap.innerHTML = "";
+  let running = Number(state.currentCash || 0);
+
+  state.transactions.forEach((t,i) => {
+    running += t.type === "in" ? Number(t.amount||0) : -Number(t.amount||0);
+    const row = document.createElement("div");
+    row.className = "tx-row";
+    row.innerHTML = `
+      <label><span>Date</span><input type="date" value="${t.date}" onchange="updateTx(${i},'date',this.value)"></label>
+      <label class="wide"><span>Payment</span><input value="${esc(t.name)}" onchange="updateTx(${i},'name',this.value)"></label>
+      <label><span>Type</span><select onchange="updateTx(${i},'type',this.value)">
+        <option value="in" ${t.type==="in"?"selected":""}>Money in</option>
+        <option value="out" ${t.type==="out"?"selected":""}>Money out</option>
+      </select></label>
+      <label><span>Amount</span><input type="number" step="0.01" value="${t.amount}" onchange="updateTx(${i},'amount',this.value)"></label>
+      <div><span class="small">Balance after</span><div class="readonly ${running<0?'out':''}">${fmt(running)}</div></div>
+      <button class="danger" onclick="removeTx(${i})">Remove</button>
+    `;
+    wrap.appendChild(row);
+  });
+}
+
+function renderSummary(){
+  const cash = Number(state.currentCash || 0);
+  const pots = state.pots.reduce((s,p) => s + Math.max(0, Number(p.total||0)-Number(p.used||0)), 0);
+  const incoming = state.transactions.filter(t=>t.type==="in").reduce((s,t)=>s+Number(t.amount||0),0);
+  const outgoing = state.transactions.filter(t=>t.type==="out").reduce((s,t)=>s+Number(t.amount||0),0);
+  const freeNow = cash - pots;
+  const left = cash + incoming - outgoing - pots;
+
+  setText("cashNow", cash);
+  setText("protectedNow", pots);
+  setText("freeNow", freeNow);
+  setText("sumCash", cash);
+  setText("sumIn", incoming);
+  setText("sumOut", outgoing);
+  setText("sumPots", pots);
+  setText("sumLeft", left);
+
+  document.getElementById("freeNow").classList.toggle("negative", freeNow < 0);
+  document.getElementById("sumLeft").classList.toggle("negative", left < 0);
+}
+
+function setText(id,n){ document.getElementById(id).textContent = fmt(n); }
+
+function updatePot(i,key,val){
+  state.pots[i][key] = ["total","used"].includes(key) ? Number(val) : val;
+  render();
+}
+function updateTx(i,key,val){
+  state.transactions[i][key] = key==="amount" ? Number(val) : val;
+  render();
+}
+function addPot(){
+  state.pots.push({name:"New pot", total:0, used:0});
+  render();
+}
+function removePot(i){
+  state.pots.splice(i,1);
+  render();
+}
+function addTransaction(){
+  state.transactions.push({date:"2026-08-01", name:"New payment", type:"out", amount:0});
+  render();
+}
+function removeTx(i){
+  state.transactions.splice(i,1);
+  render();
+}
+
+document.getElementById("currentCash").addEventListener("change", e => {
+  state.currentCash = Number(e.target.value);
+  render();
+});
+
+function exportData(){
+  const blob = new Blob([JSON.stringify(state,null,2)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "compass-backup.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+document.getElementById("importFile").addEventListener("change", async e => {
+  const file = e.target.files[0];
+  if(!file) return;
+  try {
+    state = JSON.parse(await file.text());
+    render();
+    showTab("dashboard");
+  } catch {
+    alert("The backup file could not be read.");
+  }
+});
+
+function resetData(){
+  if(confirm("Reset Compass to the current prepared cashflow?")){
+    state = clone(INITIAL);
+    render();
+  }
+}
+
+function showTab(tab){
+  document.getElementById("dashboard").classList.toggle("hidden", tab!=="dashboard");
+  document.getElementById("settings").classList.toggle("hidden", tab!=="settings");
+  document.getElementById("dashBtn").classList.toggle("primary", tab==="dashboard");
+  document.getElementById("settingsBtn").classList.toggle("primary", tab==="settings");
+}
+
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("./sw.js");
+}
+render();
+</script>
+</body>
+</html>
