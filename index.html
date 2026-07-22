@@ -117,7 +117,7 @@
       <div class="summaryline"><span>Future money in</span><strong id="sumIn">0 DKK</strong></div>
       <div class="summaryline"><span>Future money out</span><strong id="sumOut">0 DKK</strong></div>
       <div class="summaryline"><span>Protected pots remaining</span><strong id="sumPots">0 DKK</strong></div>
-      <div class="summaryline big-total"><span>Left after everything entered</span><span id="sumLeft">0 DKK</span></div>
+      <div class="summaryline big-total"><span>Final cash after scheduled payments</span><span id="sumLeft">0 DKK</span></div>
     </div>
   </section>
 
@@ -249,7 +249,7 @@ function renderSummary(){
   const incoming = state.transactions.filter(t=>t.type==="in").reduce((s,t)=>s+Number(t.amount||0),0);
   const outgoing = state.transactions.filter(t=>t.type==="out").reduce((s,t)=>s+Number(t.amount||0),0);
   const freeNow = cash - pots;
-  const left = cash + incoming - outgoing - pots;
+  const left = cash + incoming - outgoing;
 
   setText("cashNow", cash);
   setText("protectedNow", pots);
@@ -332,7 +332,7 @@ function showTab(tab){
 }
 
 if("serviceWorker" in navigator){
-  navigator.serviceWorker.register("./sw.js");
+  navigator.serviceWorker.register("./sw.js").then(reg => reg.update());
 }
 render();
 </script>
