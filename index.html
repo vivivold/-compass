@@ -5,7 +5,16 @@
 <meta name="theme-color" content="#f5f1e8"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Compass">
 <link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-192.png"><title>Compass</title>
 <style>
-:root{--bg:#f5f1e8;--card:#fff;--ink:#20282d;--muted:#87909c;--line:#e4e0d8;--green:#2f765e;--green2:#e6f2ec;--red:#9a4d4d;--shadow:0 10px 28px rgba(39,46,43,.07)}*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}.app{max-width:500px;margin:auto;padding:18px 16px calc(44px + env(safe-area-inset-bottom))}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.brand{display:flex;align-items:center;gap:10px;font-size:28px;font-weight:780}.dot{width:18px;height:18px;background:var(--green);border-radius:50%;box-shadow:0 0 0 7px #dcebe4}.date,.muted{color:var(--muted)}.card{background:var(--card);border:1px solid rgba(220,216,208,.85);border-radius:25px;padding:22px;margin:15px 0;box-shadow:var(--shadow)}.label{color:var(--muted);font-size:16px}.hero{display:flex;justify-content:space-between;gap:18px;align-items:center}.amount-big{font-size:64px;line-height:1;font-weight:780;letter-spacing:-3px;margin:12px 0 8px}.currency{font-size:24px;letter-spacing:0;color:var(--muted)}.badge{display:inline-block;background:var(--green2);color:var(--green);padding:8px 14px;border-radius:999px;font-weight:720;font-size:14px}.ring{width:112px;height:112px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--green) var(--progress),#e5eee9 0)}.ring:after{content:"";position:absolute;width:84px;height:84px;background:#fff;border-radius:50%}.ringwrap{position:relative;display:grid;place-items:center;min-width:112px}.ringtext{position:absolute;z-index:2;text-align:center;font-weight:780;font-size:23px}.ringtext small{display:block;font-size:12px;color:var(--muted);font-weight:500}.weektop,.split{display:flex;justify-content:space-between;gap:16px}.weeknum{font-size:34px;font-weight:760}.progress{height:10px;background:#eeeae2;border-radius:99px;overflow:hidden;margin:14px 0 10px}.progress>div{height:100%;background:var(--green)}input,select{width:100%;border:1px solid var(--line);background:#fff;border-radius:15px;padding:14px;font:inherit;font-size:16px;color:var(--ink)}button{border:0;border-radius:15px;padding:14px 17px;font:inherit;font-size:16px;cursor:pointer}.primary{background:var(--green);color:#fff;font-weight:720}.soft{background:var(--green2);color:var(--green);font-weight:720}.danger{background:#f7ece9;color:var(--red);font-weight:700}.ghost{background:#f6f4ef;border:1px solid var(--line)}.row{display:flex;gap:10px;align-items:center}.row>*{flex:1}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}.tab{background:#f6f4ef;color:var(--muted)}.tab.active{background:var(--green2);color:var(--green);font-weight:750}details{background:var(--card);border:1px solid rgba(220,216,208,.85);border-radius:18px;margin:9px 0;box-shadow:0 5px 16px rgba(39,46,43,.035);overflow:hidden}summary{list-style:none;padding:17px 19px;font-size:17px;font-weight:720;cursor:pointer;display:flex;justify-content:space-between}summary::-webkit-details-marker{display:none}summary:after{content:"⌄";color:var(--muted)}details[open] summary:after{content:"⌃"}.inside{padding:0 19px 19px}.item{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}.item:last-child{border-bottom:0}.item-main{min-width:0}.item-title{font-weight:720}.item-note{color:var(--muted);font-size:13px;margin-top:3px;word-break:break-word}.item-money{text-align:right;white-space:nowrap;font-weight:760}.in{color:var(--green)}.out{color:var(--red)}.tiny{font-size:12px;color:var(--muted)}.ratebox{background:#f3f7f4;border-radius:14px;padding:12px;margin:12px 0;font-size:13px;color:#52635b;line-height:1.45}.actions{display:flex;gap:7px;justify-content:flex-end;margin-top:7px}.actions button{padding:7px 10px;font-size:13px}.hidden{display:none!important}.total{font-size:24px;font-weight:780}footer{text-align:center;color:var(--muted);font-size:13px;padding:28px 0 6px}@media(max-width:390px){.amount-big{font-size:55px}.ringwrap{display:none}.row.stack{flex-direction:column}.row.stack>*{width:100%}}
+:root{--bg:#f5f1e8;--card:#fff;--ink:#20282d;--muted:#87909c;--line:#e4e0d8;--green:#2f765e;--green2:#e6f2ec;--red:#9a4d4d;--shadow:0 10px 28px rgba(39,46,43,.07)}*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}.app{max-width:500px;margin:auto;padding:18px 16px calc(44px + env(safe-area-inset-bottom))}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.brand{display:flex;align-items:center;gap:10px;font-size:28px;font-weight:780}.dot{width:18px;height:18px;background:var(--green);border-radius:50%;box-shadow:0 0 0 7px #dcebe4}.date,.muted{color:var(--muted)}.card{background:var(--card);border:1px solid rgba(220,216,208,.85);border-radius:25px;padding:22px;margin:15px 0;box-shadow:var(--shadow)}.label{color:var(--muted);font-size:16px}.hero{display:flex;justify-content:space-between;gap:18px;align-items:center}.amount-big{font-size:64px;line-height:1;font-weight:780;letter-spacing:-3px;margin:12px 0 8px}.currency{font-size:24px;letter-spacing:0;color:var(--muted)}.badge{display:inline-block;background:var(--green2);color:var(--green);padding:8px 14px;border-radius:999px;font-weight:720;font-size:14px}.ring{width:112px;height:112px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--green) var(--progress),#e5eee9 0)}.ring:after{content:"";position:absolute;width:84px;height:84px;background:#fff;border-radius:50%}.ringwrap{position:relative;display:grid;place-items:center;min-width:112px}.ringtext{position:absolute;z-index:2;text-align:center;font-weight:780;font-size:23px}.ringtext small{display:block;font-size:12px;color:var(--muted);font-weight:500}.weektop,.split{display:flex;justify-content:space-between;gap:16px}.weeknum{font-size:34px;font-weight:760}.progress{height:10px;background:#eeeae2;border-radius:99px;overflow:hidden;margin:14px 0 10px}.progress>div{height:100%;background:var(--green)}input,select{width:100%;border:1px solid var(--line);background:#fff;border-radius:15px;padding:14px;font:inherit;font-size:16px;color:var(--ink)}button{border:0;border-radius:15px;padding:14px 17px;font:inherit;font-size:16px;cursor:pointer}.primary{background:var(--green);color:#fff;font-weight:720}.soft{background:var(--green2);color:var(--green);font-weight:720}.danger{background:#f7ece9;color:var(--red);font-weight:700}.ghost{background:#f6f4ef;border:1px solid var(--line)}.row{display:flex;gap:10px;align-items:center}.row>*{flex:1}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}.tab{background:#f6f4ef;color:var(--muted)}.tab.active{background:var(--green2);color:var(--green);font-weight:750}details{background:var(--card);border:1px solid rgba(220,216,208,.85);border-radius:18px;margin:9px 0;box-shadow:0 5px 16px rgba(39,46,43,.035);overflow:hidden}summary{list-style:none;padding:17px 19px;font-size:17px;font-weight:720;cursor:pointer;display:flex;justify-content:space-between}summary::-webkit-details-marker{display:none}summary:after{content:"⌄";color:var(--muted)}details[open] summary:after{content:"⌃"}.inside{padding:0 19px 19px}.item{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}.item:last-child{border-bottom:0}.item-main{min-width:0}.item-title{font-weight:720}.item-note{color:var(--muted);font-size:13px;margin-top:3px;word-break:break-word}.item-money{text-align:right;white-space:nowrap;font-weight:760}.in{color:var(--green)}.out{color:var(--red)}.tiny{font-size:12px;color:var(--muted)}.ratebox{background:#f3f7f4;border-radius:14px;padding:12px;margin:12px 0;font-size:13px;color:#52635b;line-height:1.45}.actions{display:flex;gap:7px;justify-content:flex-end;margin-top:7px}.actions button{padding:7px 10px;font-size:13px}.hidden{display:none!important}.total{font-size:24px;font-weight:780}footer{text-align:center;color:var(--muted);font-size:13px;padding:28px 0 6px}
+.modal-backdrop{position:fixed;inset:0;background:rgba(24,31,29,.42);display:flex;align-items:flex-end;justify-content:center;padding:14px;z-index:50}
+.modal{width:min(500px,100%);max-height:90vh;overflow:auto;background:var(--card);border-radius:25px;padding:22px;box-shadow:0 24px 70px rgba(24,31,29,.25)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.modal-head h2{margin:0;font-size:24px}.close{background:#f4f1eb;padding:9px 12px}
+.field{margin-top:12px}.field label{display:block;color:var(--muted);font-size:14px;margin:0 0 6px 2px}
+.timeline-date{font-size:13px;font-weight:760;color:var(--green);margin-top:15px}
+.timeline-balance{font-size:12px;color:var(--muted);text-align:right;margin-top:4px}
+.due-pill{display:inline-block;background:#f4f1eb;color:#68717b;padding:5px 9px;border-radius:999px;font-size:12px;margin-top:5px}
+.warningbox{background:#fbf2e8;border-radius:15px;padding:13px;margin-top:12px;color:#73593b;font-size:14px;line-height:1.45}@media(max-width:390px){.amount-big{font-size:55px}.ringwrap{display:none}.row.stack{flex-direction:column}.row.stack>*{width:100%}}
 </style></head>
 <body><div class="app">
 <header><div class="brand"><span class="dot"></span>Compass</div><div class="date" id="todayDate"></div></header>
@@ -19,11 +28,20 @@
   <div class="row stack">
     <input id="newPotName" placeholder="New pot name">
     <input id="newPotAmount" type="number" inputmode="decimal" placeholder="Amount">
+  </div>
+  <div class="row stack" style="margin-top:10px">
+    <input id="newPotDate" type="date" aria-label="Target date">
     <button class="soft" onclick="addPot()">Add pot</button>
   </div>
   <div id="potsList" style="margin-top:10px"></div>
 </div></details>
-<details><summary>Cashflow overview</summary><div class="inside"><div class="item"><span>Current bank balance</span><strong id="currentCashView"></strong></div><div class="item"><span>Protected in pots</span><strong id="protectedTotalView"></strong></div><div class="item"><span>Free cash now</span><strong id="freeCashView"></strong></div><div class="item"><span>Scheduled money in</span><strong id="futureInView"></strong></div><div class="item"><span>Scheduled money out</span><strong id="futureOutView"></strong></div><div class="item"><span>Expected final bank balance</span><strong id="finalCashView"></strong></div><div class="item"><span>Expected final free balance</span><strong class="total" id="finalFreeCashView"></strong></div></div></details>
+<details><summary>Cashflow overview</summary><div class="inside">
+    <div id="cashflowStatusCard" class="ratebox"></div>
+    <div id="tightPeriodsList"></div>
+    <div class="item"><span>Current bank balance</span><strong id="currentCashView"></strong></div><div class="item"><span>Protected in pots</span><strong id="protectedTotalView"></strong></div><div class="item"><span>Free cash now</span><strong id="freeCashView"></strong></div><div class="item"><span>Scheduled money in</span><strong id="futureInView"></strong></div><div class="item"><span>Scheduled money out</span><strong id="futureOutView"></strong></div>
+<div class="item"><span>Payments in the next 7 days</span><strong id="next7OutView"></strong></div>
+<div class="item"><span>Lowest projected free balance</span><strong id="lowestBalanceView"></strong></div>
+<div class="item"><span>Lowest-balance date</span><strong id="lowestDateView"></strong></div><div class="item"><span>Expected final bank balance</span><strong id="finalCashView"></strong></div><div class="item"><span>Expected final free balance</span><strong class="total" id="finalFreeCashView"></strong></div></div></details>
 <details><summary>Settings</summary><div class="inside"><label class="label">Current bank balance</label><input id="currentCashInput" type="number" inputmode="decimal"><div style="height:10px"></div><label class="label">Daily budget</label><input id="dailyBudgetInput" type="number" inputmode="decimal"><div style="height:10px"></div><label class="label">Weekly budget</label><input id="weeklyBudgetInput" type="number" inputmode="decimal"><div style="height:12px"></div><button class="primary" onclick="saveSettings()">Save settings</button><div style="height:12px"></div>
     <button class="soft" onclick="exportBackup()">Export backup</button>
     <div style="height:10px"></div>
@@ -32,43 +50,248 @@
       <input id="restoreFile" type="file" accept=".json" style="display:none">
     </label>
     <p class="tiny">Foreign currency rates are retrieved online and stored with every entry. Bank and Revolut settlement amounts can be corrected through Edit.</p></div></details>
-<footer>Every number recalculates as money moves.<br>Protect tomorrow · free today.<br><strong>Version 3.2 · active protected pots</strong></footer></div>
+
+<div id="entryModal" class="modal-backdrop hidden" onclick="backdropClose(event,'entryModal')">
+  <div class="modal">
+    <div class="modal-head"><h2>Edit money item</h2><button class="close" onclick="closeModal('entryModal')">Close</button></div>
+    <input id="editEntryId" type="hidden">
+    <div class="field"><label>Name or note</label><input id="editEntryName"></div>
+    <div class="row stack">
+      <div class="field"><label>Date</label><input id="editEntryDate" type="date"></div>
+      <div class="field"><label>Category</label><input id="editEntryCategory"></div>
+    </div>
+    <div class="row stack">
+      <div class="field"><label>Original amount</label><input id="editEntryOriginal" type="number" inputmode="decimal"></div>
+      <div class="field"><label>Currency</label><select id="editEntryCurrency"><option>DKK</option><option>EUR</option><option>NOK</option><option>SEK</option><option>USD</option><option>GBP</option></select></div>
+    </div>
+    <div class="field"><label>Exact DKK amount</label><input id="editEntryDkk" type="number" inputmode="decimal"></div>
+    <div class="row stack">
+      <div class="field"><label>Direction</label><select id="editEntryType"><option value="out">Money out</option><option value="in">Money in</option></select></div>
+      <div class="field"><label>Status</label><select id="editEntryStatus"><option value="scheduled">Scheduled</option><option value="received">Received / paid</option></select></div>
+    </div>
+    <button class="primary" style="width:100%;margin-top:18px" onclick="saveEntryEdit()">Save changes</button>
+  </div>
+</div>
+
+<div id="potModal" class="modal-backdrop hidden" onclick="backdropClose(event,'potModal')">
+  <div class="modal">
+    <div class="modal-head"><h2>Edit protected pot</h2><button class="close" onclick="closeModal('potModal')">Close</button></div>
+    <input id="editPotId" type="hidden">
+    <div class="field"><label>Pot name</label><input id="editPotName"></div>
+    <div class="field"><label>Protected amount</label><input id="editPotAmount" type="number" inputmode="decimal"></div>
+    <div class="field"><label>Target or use-by date</label><input id="editPotDate" type="date"></div>
+    <button class="primary" style="width:100%;margin-top:18px" onclick="savePotEdit()">Save changes</button>
+  </div>
+</div>
+
+<footer>Every number recalculates as money moves.<br>Protect tomorrow · free today.<br><strong>Version 3.4 · tight-period dates</strong></footer></div>
 <script>
 const INITIAL={currentCash:17303.52,dailyBudget:350,weeklyBudget:1842,manualToday:43,pots:[{name:"Food until 12 August",remaining:5814.52},{name:"Liam",remaining:371},{name:"Norah allowance",remaining:600},{name:"Travel",remaining:5000}],entries:[{id:1,date:"2026-07-25",name:"Nordic Culture Fund",category:"Grant",type:"in",status:"scheduled",originalAmount:5000,currency:"DKK",dkkAmount:5000,rate:1,rateDate:null},{id:2,date:"2026-07-25",name:"First rent",category:"Rent",type:"out",status:"scheduled",originalAmount:13000,currency:"DKK",dkkAmount:13000,rate:1,rateDate:null},{id:3,date:"2026-08-12",name:"UiT salary",category:"Salary",type:"in",status:"scheduled",originalAmount:22500,currency:"DKK",dkkAmount:22500,rate:1,rateDate:null},{id:4,date:"2026-08-12",name:"Second rent",category:"Rent",type:"out",status:"scheduled",originalAmount:12000,currency:"DKK",dkkAmount:12000,rate:1,rateDate:null},{id:5,date:"2026-08-15",name:"Reimbursement",category:"Reimbursement",type:"in",status:"scheduled",originalAmount:2000,currency:"DKK",dkkAmount:2000,rate:1,rateDate:null},{id:6,date:"2026-08-15",name:"Norah school",category:"Children",type:"out",status:"scheduled",originalAmount:2750,currency:"DKK",dkkAmount:2750,rate:1,rateDate:null},{id:7,date:"2026-08-15",name:"Furniture",category:"Home",type:"out",status:"scheduled",originalAmount:2500,currency:"DKK",dkkAmount:2500,rate:1,rateDate:null}]};
-const clone=x=>JSON.parse(JSON.stringify(x));let state;try{state=JSON.parse(localStorage.getItem("compassMoneyV3")||localStorage.getItem("compassMoneyV2"))||clone(INITIAL)}catch(e){state=clone(INITIAL)}let entryType="out";const fmt=n=>new Intl.NumberFormat("da-DK",{minimumFractionDigits:0,maximumFractionDigits:2}).format(Number(n||0));const money=n=>fmt(n)+" DKK";const todayKey=()=>new Date().toISOString().slice(0,10);document.getElementById("entryDate").value=todayKey();
-function save(){localStorage.setItem("compassMoneyV3",JSON.stringify(state))}function receivedEntries(){return state.entries.filter(x=>x.status==="received")}function todayExpenseTotal(){return receivedEntries().filter(x=>x.type==="out"&&x.date===todayKey()).reduce((s,x)=>s+x.dkkAmount,0)}function usedToday(){return Number(state.manualToday||0)+todayExpenseTotal()}function daysRemainingInWeek(){const d=new Date().getDay();return d===0?1:8-d}function categoriesFor(type){return type==="in"?["Reimbursement","Salary","Grant","Refund","Transfer","Gift","Other income"]:["Groceries","Transport","Coffee","Food out","Rent","Home","Children","Shopping","Travel","Other"]}
+const clone=x=>JSON.parse(JSON.stringify(x));let state;try{state=JSON.parse(localStorage.getItem("compassMoneyV34")||localStorage.getItem("compassMoneyV33")||localStorage.getItem("compassMoneyV3")||localStorage.getItem("compassMoneyV2"))||clone(INITIAL)}catch(e){state=clone(INITIAL)}let entryType="out";
+function migrateState(){
+ state.pots=(state.pots||[]).map((p,i)=>({id:p.id||Date.now()+i,name:p.name||"Protected pot",remaining:Number(p.remaining||0),date:p.date||""}));
+ state.entries=(state.entries||[]).map((e,i)=>({...e,id:e.id||Date.now()+100+i,date:e.date||todayKey()}));
+}
+migrateState();
+const fmt=n=>new Intl.NumberFormat("da-DK",{minimumFractionDigits:0,maximumFractionDigits:2}).format(Number(n||0));const money=n=>fmt(n)+" DKK";const todayKey=()=>new Date().toISOString().slice(0,10);
+const dateObj=v=>{const d=new Date((v||todayKey())+"T12:00:00");return Number.isNaN(d.getTime())?new Date():d};
+const prettyDate=v=>v?new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"short",year:"numeric"}).format(dateObj(v)):"Open-ended";
+const addDays=(v,n)=>{const d=dateObj(v);d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)};
+const endOfNext7=()=>addDays(todayKey(),7);
+document.getElementById("entryDate").value=todayKey();
+function save(){localStorage.setItem("compassMoneyV34",JSON.stringify(state))}function receivedEntries(){return state.entries.filter(x=>x.status==="received")}function todayExpenseTotal(){return receivedEntries().filter(x=>x.type==="out"&&x.date===todayKey()).reduce((s,x)=>s+x.dkkAmount,0)}function usedToday(){return Number(state.manualToday||0)+todayExpenseTotal()}function daysRemainingInWeek(){const d=new Date().getDay();return d===0?1:8-d}function categoriesFor(type){return type==="in"?["Reimbursement","Salary","Grant","Refund","Transfer","Gift","Other income"]:["Groceries","Transport","Coffee","Food out","Rent","Home","Children","Shopping","Travel","Other"]}
 function setEntryType(type){entryType=type;document.getElementById("expenseTab").classList.toggle("active",type==="out");document.getElementById("incomeTab").classList.toggle("active",type==="in");document.getElementById("entryHeading").textContent=type==="in"?"Add money received":"Add an expense";document.getElementById("entryCategory").innerHTML=categoriesFor(type).map(c=>`<option>${c}</option>`).join("");document.getElementById("conversionBox").classList.add("hidden")}setEntryType("out");
 async function getRate(from){if(from==="DKK")return{rate:1,date:todayKey(),source:"DKK"};const cacheKey="rate_"+from+"_DKK";try{const response=await fetch(`https://api.frankfurter.dev/v2/rates?base=${encodeURIComponent(from)}&quotes=DKK`);if(!response.ok)throw new Error("rate");const data=await response.json();const row=Array.isArray(data)?data.find(x=>x.quote==="DKK"):null;if(!row||!row.rate)throw new Error("rate");const result={rate:Number(row.rate),date:row.date,source:"Frankfurter central-bank data"};localStorage.setItem(cacheKey,JSON.stringify(result));return result}catch(e){const cached=localStorage.getItem(cacheKey);if(cached)return{...JSON.parse(cached),source:"Last saved central-bank rate"};throw new Error("Compass could not retrieve a rate. Connect to the internet or enter DKK.")}}
 async function previewAndAdd(){const amount=Number(document.getElementById("entryAmount").value),currency=document.getElementById("entryCurrency").value,category=document.getElementById("entryCategory").value,date=document.getElementById("entryDate").value||todayKey(),note=document.getElementById("entryNote").value.trim();if(!(amount>0)){alert("Enter an amount first.");return}const button=document.getElementById("addButton");button.disabled=true;button.textContent="Checking rate…";try{const r=await getRate(currency),dkk=Math.round(amount*r.rate*100)/100,box=document.getElementById("conversionBox");box.classList.remove("hidden");box.innerHTML=`<strong>${fmt(amount)} ${currency} = ${money(dkk)}</strong><br>Rate: 1 ${currency} = ${fmt(r.rate)} DKK · ${r.date}<br>${r.source}`;const received=confirm(entryType==="in"?"Has this money already arrived in your account? Press OK for received, or Cancel for expected later.":"Has this payment already left your account? Press OK for paid, or Cancel for scheduled later.");const entry={id:Date.now(),date,name:note||category,category,type:entryType,status:received?"received":"scheduled",originalAmount:amount,currency,dkkAmount:dkk,rate:r.rate,rateDate:r.date,rateSource:r.source};state.entries.push(entry);if(received)state.currentCash+=entryType==="in"?dkk:-dkk;document.getElementById("entryAmount").value="";document.getElementById("entryNote").value="";render()}catch(e){alert(e.message)}finally{button.disabled=false;button.textContent="Convert and add"}}
-function toggleStatus(id){const x=state.entries.find(e=>e.id===id);if(!x)return;if(x.status==="scheduled"){x.status="received";state.currentCash+=x.type==="in"?x.dkkAmount:-x.dkkAmount}else{x.status="scheduled";state.currentCash-=x.type==="in"?x.dkkAmount:-x.dkkAmount}render()}function editEntry(id){
+function toggleStatus(id){const x=state.entries.find(e=>e.id===id);if(!x)return;if(x.status==="scheduled"){x.status="received";state.currentCash+=x.type==="in"?x.dkkAmount:-x.dkkAmount}else{x.status="scheduled";state.currentCash-=x.type==="in"?x.dkkAmount:-x.dkkAmount}render()}function openModal(id){document.getElementById(id).classList.remove("hidden");document.body.style.overflow="hidden"}
+function closeModal(id){document.getElementById(id).classList.add("hidden");document.body.style.overflow=""}
+function backdropClose(event,id){if(event.target.id===id)closeModal(id)}
+function editEntry(id){
  const x=state.entries.find(e=>e.id===id);if(!x)return;
- const name=prompt("Name or note",x.name);if(name===null)return;
- const date=prompt("Date (YYYY-MM-DD)",x.date);if(date===null)return;
- const category=prompt("Category",x.category);if(category===null)return;
- const original=prompt("Original amount in "+x.currency,x.originalAmount);if(original===null)return;
- const dkk=prompt("Exact DKK amount credited or paid",x.dkkAmount);if(dkk===null)return;
- const old=x.dkkAmount;
- x.name=name.trim()||x.category;x.date=date||x.date;x.category=category.trim()||x.category;
- x.originalAmount=Number(original)||0;x.dkkAmount=Number(dkk)||0;
- if(x.status==="received")state.currentCash+=(x.type==="in"?1:-1)*(x.dkkAmount-old);
- render();
-}function deleteEntry(id){const i=state.entries.findIndex(e=>e.id===id);if(i<0)return;const x=state.entries[i];if(!confirm("Remove this entry?"))return;if(x.status==="received")state.currentCash-=x.type==="in"?x.dkkAmount:-x.dkkAmount;state.entries.splice(i,1);render()}function addPot(){
+ document.getElementById("editEntryId").value=id;
+ document.getElementById("editEntryName").value=x.name||"";
+ document.getElementById("editEntryDate").value=x.date||todayKey();
+ document.getElementById("editEntryCategory").value=x.category||"";
+ document.getElementById("editEntryOriginal").value=x.originalAmount??x.dkkAmount??0;
+ document.getElementById("editEntryCurrency").value=x.currency||"DKK";
+ document.getElementById("editEntryDkk").value=x.dkkAmount||0;
+ document.getElementById("editEntryType").value=x.type||"out";
+ document.getElementById("editEntryStatus").value=x.status||"scheduled";
+ openModal("entryModal");
+}
+function saveEntryEdit(){
+ const id=Number(document.getElementById("editEntryId").value);
+ const x=state.entries.find(e=>e.id===id);if(!x)return;
+ const oldEffect=x.status==="received"?(x.type==="in"?x.dkkAmount:-x.dkkAmount):0;
+ x.name=document.getElementById("editEntryName").value.trim()||x.category||"Money item";
+ x.date=document.getElementById("editEntryDate").value||todayKey();
+ x.category=document.getElementById("editEntryCategory").value.trim()||"Other";
+ x.originalAmount=Math.max(0,Number(document.getElementById("editEntryOriginal").value)||0);
+ x.currency=document.getElementById("editEntryCurrency").value;
+ x.dkkAmount=Math.max(0,Number(document.getElementById("editEntryDkk").value)||0);
+ x.type=document.getElementById("editEntryType").value;
+ x.status=document.getElementById("editEntryStatus").value;
+ const newEffect=x.status==="received"?(x.type==="in"?x.dkkAmount:-x.dkkAmount):0;
+ state.currentCash+=newEffect-oldEffect;
+ closeModal("entryModal");render();
+}
+function deleteEntry(id){const i=state.entries.findIndex(e=>e.id===id);if(i<0)return;const x=state.entries[i];if(!confirm("Remove this entry?"))return;if(x.status==="received")state.currentCash-=x.type==="in"?x.dkkAmount:-x.dkkAmount;state.entries.splice(i,1);render()}function addPot(){
  const name=document.getElementById("newPotName").value.trim();
  const remaining=Number(document.getElementById("newPotAmount").value);
+ const date=document.getElementById("newPotDate").value||"";
  if(!name||remaining<0){alert("Enter a pot name and amount.");return}
- state.pots.push({id:Date.now(),name,remaining});
- document.getElementById("newPotName").value="";document.getElementById("newPotAmount").value="";render();
+ state.pots.push({id:Date.now(),name,remaining,date});
+ document.getElementById("newPotName").value="";
+ document.getElementById("newPotAmount").value="";
+ document.getElementById("newPotDate").value="";
+ render();
 }
-function editPot(index){
- const x=state.pots[index];if(!x)return;
- const name=prompt("Pot name",x.name);if(name===null)return;
- const amount=prompt("Amount remaining",x.remaining);if(amount===null)return;
- x.name=name.trim()||x.name;x.remaining=Math.max(0,Number(amount)||0);render();
+function editPot(id){
+ const x=state.pots.find(p=>p.id===id);if(!x)return;
+ document.getElementById("editPotId").value=id;
+ document.getElementById("editPotName").value=x.name||"";
+ document.getElementById("editPotAmount").value=x.remaining||0;
+ document.getElementById("editPotDate").value=x.date||"";
+ openModal("potModal");
 }
-function deletePot(index){if(!confirm("Remove this protected pot?"))return;state.pots.splice(index,1);render();}
+function savePotEdit(){
+ const id=Number(document.getElementById("editPotId").value);
+ const x=state.pots.find(p=>p.id===id);if(!x)return;
+ x.name=document.getElementById("editPotName").value.trim()||"Protected pot";
+ x.remaining=Math.max(0,Number(document.getElementById("editPotAmount").value)||0);
+ x.date=document.getElementById("editPotDate").value||"";
+ closeModal("potModal");render();
+}
+function deletePot(id){
+ const i=state.pots.findIndex(p=>p.id===id);if(i<0)return;
+ if(!confirm("Remove this protected pot?"))return;
+ state.pots.splice(i,1);render();
+}
 function saveManualToday(){state.manualToday=Number(document.getElementById("manualToday").value||0);render()}function saveSettings(){state.currentCash=Number(document.getElementById("currentCashInput").value||0);state.dailyBudget=Number(document.getElementById("dailyBudgetInput").value||0);state.weeklyBudget=Number(document.getElementById("weeklyBudgetInput").value||0);render()}
-function renderLedger(){const type=document.getElementById("filterType").value,status=document.getElementById("filterStatus").value,entries=[...state.entries].filter(x=>(type==="all"||x.type===type)&&(status==="all"||x.status===status)).sort((a,b)=>b.date.localeCompare(a.date));document.getElementById("ledgerList").innerHTML=entries.map(entryHTML).join("")||'<div class="tiny">No entries here yet.</div>'}function entryHTML(x){const original=x.currency!=="DKK"?`${fmt(x.originalAmount)} ${x.currency} · `:"",rate=x.currency!=="DKK"?` · rate ${fmt(x.rate)} (${x.rateDate})`:"";return `<div class="item"><div class="item-main"><div class="item-title">${escapeHtml(x.name)}</div><div class="item-note">${x.date} · ${x.category} · ${x.status}${rate}</div><div class="actions"><button class="ghost" onclick="toggleStatus(${x.id})">${x.status==="scheduled"?"Mark received/paid":"Move to scheduled"}</button><button class="ghost" onclick="editEntry(${x.id})">Edit</button><button class="danger" onclick="deleteEntry(${x.id})">Delete</button></div></div><div class="item-money ${x.type}">${x.type==="in"?"+":"−"}${original}${money(x.dkkAmount)}</div></div>`}function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
-function render(){const used=usedToday(),protectedTotal=state.pots.reduce((sum,p)=>sum+Number(p.remaining||0),0),freeCash=Math.max(0,state.currentCash-protectedTotal),available=Math.max(0,Math.min(state.dailyBudget-used,freeCash)),pct=Math.min(100,Math.round((used/state.dailyBudget)*100)||0),weekUsed=used,weekLeft=Math.max(0,Math.min(state.weeklyBudget-weekUsed,freeCash));document.getElementById("todayDate").textContent=new Intl.DateTimeFormat("en-GB",{weekday:"long",day:"numeric",month:"long"}).format(new Date());document.getElementById("availableToday").textContent=fmt(available);document.getElementById("dailyPercent").textContent=pct+"%";document.getElementById("dailyRing").style.setProperty("--progress",pct+"%");document.getElementById("trackBadge").textContent=available>0?"On track to payday":"Daily budget used";document.getElementById("weekLeft").textContent=fmt(weekLeft);document.getElementById("weekUsed").textContent=fmt(weekUsed);document.getElementById("weekBudgetView").textContent=fmt(state.weeklyBudget);document.getElementById("daysLeft").textContent=daysRemainingInWeek();document.getElementById("weekProgress").style.width=Math.min(100,(weekUsed/state.weeklyBudget)*100)+"%";document.getElementById("todayUsedView").textContent=money(used);document.getElementById("manualToday").value=state.manualToday;const today=receivedEntries().filter(x=>x.type==="out"&&x.date===todayKey());document.getElementById("todayList").innerHTML=today.map(entryHTML).join("")||'<div class="tiny">Today’s individual expenses will appear here.</div>';const upcoming=state.entries.filter(x=>x.status==="scheduled").sort((a,b)=>a.date.localeCompare(b.date));document.getElementById("upcomingList").innerHTML=upcoming.map(entryHTML).join("")||'<div class="tiny">Everything scheduled has been completed.</div>';document.getElementById("potsList").innerHTML=state.pots.map((x,i)=>`<div class="item"><div class="item-main"><div class="item-title">${escapeHtml(x.name)}</div><div class="actions"><button class="ghost" onclick="editPot(${i})">Edit</button><button class="danger" onclick="deletePot(${i})">Delete</button></div></div><strong>${money(x.remaining)}</strong></div>`).join("")||'<div class="tiny">Add your first protected pot above.</div>';const futureIn=upcoming.filter(x=>x.type==="in").reduce((s,x)=>s+x.dkkAmount,0),futureOut=upcoming.filter(x=>x.type==="out").reduce((s,x)=>s+x.dkkAmount,0);document.getElementById("currentCashView").textContent=money(state.currentCash);document.getElementById("protectedTotalView").textContent=money(protectedTotal);document.getElementById("freeCashView").textContent=money(freeCash);document.getElementById("futureInView").textContent=money(futureIn);document.getElementById("futureOutView").textContent=money(futureOut);const finalBank=state.currentCash+futureIn-futureOut,finalFree=finalBank-protectedTotal;document.getElementById("finalCashView").textContent=money(finalBank);document.getElementById("finalFreeCashView").textContent=money(finalFree);document.getElementById("currentCashInput").value=state.currentCash;document.getElementById("dailyBudgetInput").value=state.dailyBudget;document.getElementById("weeklyBudgetInput").value=state.weeklyBudget;renderLedger();save()}
+function renderLedger(){const type=document.getElementById("filterType").value,status=document.getElementById("filterStatus").value,entries=[...state.entries].filter(x=>(type==="all"||x.type===type)&&(status==="all"||x.status===status)).sort((a,b)=>b.date.localeCompare(a.date));document.getElementById("ledgerList").innerHTML=entries.map(entryHTML).join("")||'<div class="tiny">No entries here yet.</div>'}function entryHTML(x){
+ const original=x.currency!=="DKK"?`${fmt(x.originalAmount)} ${x.currency} · `:"";
+ const rate=x.currency!=="DKK"?` · rate ${fmt(x.rate)} (${x.rateDate})`:"";
+ return `<div class="item"><div class="item-main"><div class="item-title">${escapeHtml(x.name)}</div><div class="item-note">${prettyDate(x.date)} · ${escapeHtml(x.category)} · ${x.status}${rate}</div><div class="actions"><button class="ghost" onclick="toggleStatus(${x.id})">${x.status==="scheduled"?"Mark received/paid":"Move to scheduled"}</button><button class="ghost" onclick="editEntry(${x.id})">Edit</button><button class="danger" onclick="deleteEntry(${x.id})">Delete</button></div></div><div class="item-money ${x.type}">${x.type==="in"?"+":"−"}${original}${money(x.dkkAmount)}</div></div>`;
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+
+function projectedGroups(){
+ const grouped={};
+ state.entries.filter(x=>x.status==="scheduled").forEach(x=>{
+  const date=x.date||todayKey();
+  if(!grouped[date])grouped[date]=[];
+  grouped[date].push(x);
+ });
+ return Object.keys(grouped).sort().map(date=>({date,items:grouped[date]}));
+}
+function projectionStats(){
+ const protectedTotal=state.pots.reduce((sum,p)=>sum+Number(p.remaining||0),0);
+ let bank=Number(state.currentCash||0),free=bank-protectedTotal;
+ let lowestFree=free,lowestDate=todayKey();
+ const rows=[];
+ for(const group of projectedGroups()){
+  const incoming=group.items.filter(x=>x.type==="in").reduce((a,x)=>a+Number(x.dkkAmount||0),0);
+  const outgoing=group.items.filter(x=>x.type==="out").reduce((a,x)=>a+Number(x.dkkAmount||0),0);
+  bank+=incoming-outgoing;free=bank-protectedTotal;
+  if(free<lowestFree){lowestFree=free;lowestDate=group.date}
+  rows.push({...group,incoming,outgoing,bank,free});
+ }
+ return {rows,lowestFree,lowestDate,protectedTotal};
+}
+function pressureLevel(free){
+ const tightLine=Math.max(Number(state.weeklyBudget||0),Number(state.dailyBudget||0)*7);
+ const carefulLine=tightLine*2;
+ if(free<tightLine)return "tight";
+ if(free<carefulLine)return "careful";
+ return "calm";
+}
+function buildCashflowPeriods(){
+ const stats=projectionStats();
+ const events=[{date:todayKey(),items:[],free:Number(state.currentCash||0)-stats.protectedTotal},...stats.rows];
+ const periods=[];let current=null;
+ events.forEach((ev,i)=>{
+  const level=pressureLevel(ev.free);
+  const nextDate=i+1<events.length?events[i+1].date:"";
+  const reasons=(ev.items||[]).map(x=>`${x.type==="out"?"Payment":"Income"}: ${x.name} (${x.type==="out"?"−":"+"}${money(x.dkkAmount)})`);
+  if(!current||current.level!==level){
+   if(current)periods.push(current);
+   current={level,start:ev.date,end:nextDate?addDays(nextDate,-1):"",lowestFree:ev.free,lowestDate:ev.date,reasons:[...reasons]};
+  }else{
+   current.end=nextDate?addDays(nextDate,-1):"";
+   current.reasons.push(...reasons);
+   if(ev.free<current.lowestFree){current.lowestFree=ev.free;current.lowestDate=ev.date}
+  }
+ });
+ if(current)periods.push(current);
+ return periods.filter(p=>p.level==="tight"||p.level==="careful");
+}
+function nextReliefAfter(date){
+ return state.entries.filter(x=>x.status==="scheduled"&&x.type==="in"&&x.date>=date).sort((a,b)=>a.date.localeCompare(b.date))[0]||null;
+}
+function renderCashflowPressure(){
+ const stats=projectionStats();
+ const periods=buildCashflowPeriods();
+ const currentFree=Number(state.currentCash||0)-stats.protectedTotal;
+ const now=pressureLevel(currentFree);
+ const title=now==="calm"?"Cashflow is comfortable now":now==="careful"?"Cashflow needs care now":"Cashflow is tight now";
+ const cls=now==="calm"?"status-calm":now==="careful"?"status-careful":"status-tight";
+ document.getElementById("cashflowStatusCard").innerHTML=`<strong class="${cls}">${title}</strong><br>Free cash now: ${money(currentFree)}<br>Lowest projected free balance: ${money(stats.lowestFree)} on ${prettyDate(stats.lowestDate)}`;
+ document.getElementById("tightPeriodsList").innerHTML=periods.map(p=>{
+  const relief=nextReliefAfter(p.start);
+  const label=p.level==="tight"?"Tight period":"Careful period";
+  const c=p.level==="tight"?"status-tight":"status-careful";
+  const end=p.end?prettyDate(p.end):"until the next change";
+  const reasons=p.reasons.length?p.reasons.slice(0,3).map(escapeHtml).join("<br>"):"Lower free cash during this period";
+  const reliefText=relief?`Relief: ${escapeHtml(relief.name)} arrives ${prettyDate(relief.date)} (+${money(relief.dkkAmount)})`:"";
+  return `<div class="period-card"><div class="period-title ${c}">${label}: ${prettyDate(p.start)} → ${end}</div><div class="period-meta">Lowest free balance: ${money(p.lowestFree)} on ${prettyDate(p.lowestDate)}</div><div class="period-reason">${reasons}${reliefText?`<br><strong>${reliefText}</strong>`:""}</div></div>`;
+ }).join("")||'<div class="period-card"><div class="period-title status-calm">No tight period appears in the current schedule.</div><div class="period-meta">Your protected pots remain covered throughout the visible cashflow.</div></div>';
+}
+function render(){
+ const used=usedToday();
+ const protectedTotal=state.pots.reduce((sum,p)=>sum+Number(p.remaining||0),0);
+ const freeCash=Math.max(0,state.currentCash-protectedTotal);
+ const available=Math.max(0,Math.min(state.dailyBudget-used,freeCash));
+ const pct=Math.min(100,Math.round((used/state.dailyBudget)*100)||0);
+ const weekUsed=used;
+ const weekLeft=Math.max(0,Math.min(state.weeklyBudget-weekUsed,freeCash));
+ document.getElementById("todayDate").textContent=new Intl.DateTimeFormat("en-GB",{weekday:"long",day:"numeric",month:"long"}).format(new Date());
+ document.getElementById("availableToday").textContent=fmt(available);
+ document.getElementById("dailyPercent").textContent=pct+"%";
+ document.getElementById("dailyRing").style.setProperty("--progress",pct+"%");
+ document.getElementById("trackBadge").textContent=available>0?"On track to payday":"Daily budget used";
+ document.getElementById("weekLeft").textContent=fmt(weekLeft);
+ document.getElementById("weekUsed").textContent=fmt(weekUsed);
+ document.getElementById("weekBudgetView").textContent=fmt(state.weeklyBudget);
+ document.getElementById("daysLeft").textContent=daysRemainingInWeek();
+ document.getElementById("weekProgress").style.width=Math.min(100,(weekUsed/state.weeklyBudget)*100)+"%";
+ document.getElementById("todayUsedView").textContent=money(used);
+ document.getElementById("manualToday").value=state.manualToday;
+ const today=receivedEntries().filter(x=>x.type==="out"&&x.date===todayKey());
+ document.getElementById("todayList").innerHTML=today.map(entryHTML).join("")||'<div class="tiny">Today’s individual expenses will appear here.</div>';
+ const upcoming=state.entries.filter(x=>x.status==="scheduled").sort((a,b)=>(a.date||"9999").localeCompare(b.date||"9999"));
+ document.getElementById("upcomingList").innerHTML=upcoming.map(entryHTML).join("")||'<div class="tiny">Everything scheduled has been completed.</div>';
+ const sortedPots=[...state.pots].sort((a,b)=>(a.date||"9999").localeCompare(b.date||"9999"));
+ document.getElementById("potsList").innerHTML=sortedPots.map(x=>`<div class="item"><div class="item-main"><div class="item-title">${escapeHtml(x.name)}</div><span class="due-pill">${prettyDate(x.date)}</span><div class="actions"><button class="ghost" onclick="editPot(${x.id})">Edit</button><button class="danger" onclick="deletePot(${x.id})">Delete</button></div></div><strong>${money(x.remaining)}</strong></div>`).join("")||'<div class="tiny">Add your first protected pot above.</div>';
+ const futureIn=upcoming.filter(x=>x.type==="in").reduce((s,x)=>s+x.dkkAmount,0);
+ const futureOut=upcoming.filter(x=>x.type==="out").reduce((s,x)=>s+x.dkkAmount,0);
+ const next7Out=upcoming.filter(x=>x.type==="out"&&x.date>=todayKey()&&x.date<=endOfNext7()).reduce((s,x)=>s+x.dkkAmount,0);
+ const stats=projectionStats();
+ document.getElementById("currentCashView").textContent=money(state.currentCash);
+ document.getElementById("protectedTotalView").textContent=money(protectedTotal);
+ document.getElementById("freeCashView").textContent=money(freeCash);
+ document.getElementById("futureInView").textContent=money(futureIn);
+ document.getElementById("futureOutView").textContent=money(futureOut);
+ document.getElementById("next7OutView").textContent=money(next7Out);
+ document.getElementById("lowestBalanceView").textContent=money(stats.lowestFree);
+ document.getElementById("lowestDateView").textContent=prettyDate(stats.lowestDate);
+ const finalBank=state.currentCash+futureIn-futureOut,finalFree=finalBank-protectedTotal;
+ document.getElementById("finalCashView").textContent=money(finalBank);
+ document.getElementById("finalFreeCashView").textContent=money(finalFree);
+ document.getElementById("currentCashInput").value=state.currentCash;
+ document.getElementById("dailyBudgetInput").value=state.dailyBudget;
+ document.getElementById("weeklyBudgetInput").value=state.weeklyBudget;
+ renderLedger();renderCashflowPressure();save();
+}
 function exportBackup(){const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="compass-backup.json";a.click();URL.revokeObjectURL(a.href)}
 document.getElementById("restoreFile").addEventListener("change",async e=>{
  const file=e.target.files[0];if(!file)return;
