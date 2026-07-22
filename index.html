@@ -32,7 +32,7 @@
       <input id="restoreFile" type="file" accept=".json" style="display:none">
     </label>
     <p class="tiny">Foreign currency rates are retrieved online and stored with every entry. Bank and Revolut settlement amounts can be corrected through Edit.</p></div></details>
-<footer>Every number recalculates as money moves.<br>Protect tomorrow · free today.</footer></div>
+<footer>Every number recalculates as money moves.<br>Protect tomorrow · free today.<br><strong>Version 3.1 · editable pots</strong></footer></div>
 <script>
 const INITIAL={currentCash:17303.52,dailyBudget:350,weeklyBudget:1842,manualToday:43,pots:[{name:"Food until 12 August",remaining:5814.52},{name:"Liam",remaining:371},{name:"Norah allowance",remaining:600},{name:"Travel",remaining:5000}],entries:[{id:1,date:"2026-07-25",name:"Nordic Culture Fund",category:"Grant",type:"in",status:"scheduled",originalAmount:5000,currency:"DKK",dkkAmount:5000,rate:1,rateDate:null},{id:2,date:"2026-07-25",name:"First rent",category:"Rent",type:"out",status:"scheduled",originalAmount:13000,currency:"DKK",dkkAmount:13000,rate:1,rateDate:null},{id:3,date:"2026-08-12",name:"UiT salary",category:"Salary",type:"in",status:"scheduled",originalAmount:22500,currency:"DKK",dkkAmount:22500,rate:1,rateDate:null},{id:4,date:"2026-08-12",name:"Second rent",category:"Rent",type:"out",status:"scheduled",originalAmount:12000,currency:"DKK",dkkAmount:12000,rate:1,rateDate:null},{id:5,date:"2026-08-15",name:"Reimbursement",category:"Reimbursement",type:"in",status:"scheduled",originalAmount:2000,currency:"DKK",dkkAmount:2000,rate:1,rateDate:null},{id:6,date:"2026-08-15",name:"Norah school",category:"Children",type:"out",status:"scheduled",originalAmount:2750,currency:"DKK",dkkAmount:2750,rate:1,rateDate:null},{id:7,date:"2026-08-15",name:"Furniture",category:"Home",type:"out",status:"scheduled",originalAmount:2500,currency:"DKK",dkkAmount:2500,rate:1,rateDate:null}]};
 const clone=x=>JSON.parse(JSON.stringify(x));let state;try{state=JSON.parse(localStorage.getItem("compassMoneyV3")||localStorage.getItem("compassMoneyV2"))||clone(INITIAL)}catch(e){state=clone(INITIAL)}let entryType="out";const fmt=n=>new Intl.NumberFormat("da-DK",{minimumFractionDigits:0,maximumFractionDigits:2}).format(Number(n||0));const money=n=>fmt(n)+" DKK";const todayKey=()=>new Date().toISOString().slice(0,10);document.getElementById("entryDate").value=todayKey();
@@ -76,6 +76,18 @@ document.getElementById("restoreFile").addEventListener("change",async e=>{
  catch(err){alert("This backup file could not be restored.");}
  e.target.value="";
 });
-if("serviceWorker" in navigator){navigator.serviceWorker.register("./sw.js").then(r=>r.update())}
+async function clearOldCompassCache(){
+ try{
+  if("serviceWorker" in navigator){
+   const regs=await navigator.serviceWorker.getRegistrations();
+   for(const reg of regs) await reg.unregister();
+  }
+  if("caches" in window){
+   const names=await caches.keys();
+   for(const name of names) await caches.delete(name);
+  }
+ }catch(e){}
+}
+clearOldCompassCache();
 render();
 </script></body></html>
