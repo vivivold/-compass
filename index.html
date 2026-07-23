@@ -17,7 +17,7 @@
 .warningbox{background:#fbf2e8;border-radius:15px;padding:13px;margin-top:12px;color:#73593b;font-size:14px;line-height:1.45}@media(max-width:700px){.app{padding-left:16px;padding-right:16px}.overview-grid{grid-template-columns:1fr}.bank-card{min-height:235px}.bank-amount{font-size:60px}.amount-big{font-size:50px}.ringwrap{display:none}.row.stack{flex-direction:column}.row.stack>*{width:100%}.forecast-row{grid-template-columns:62px 1fr auto;gap:8px;padding-left:22px}.forecast-balance{font-size:15px}}
 </style></head>
 <body><div class="app">
-<header><div class="brand"><span class="dot"></span>Compass</div><div style="text-align:right"><div class="date" id="todayDate"></div><div style="margin-top:4px;font-size:11px;font-weight:750;color:var(--green)">VERSION 3.7</div></div></header>
+<header><div class="brand"><span class="dot"></span>Compass</div><div style="text-align:right"><div class="date" id="todayDate"></div><div style="margin-top:4px;font-size:11px;font-weight:750;color:var(--green)">VERSION 3.8</div></div></header>
 <div class="card"><div class="weektop"><div><div class="label">Every three days</div><div class="weeknum">What will really be there</div></div><div class="muted" style="text-align:right">real account money</div></div><div class="forecast" id="forecastList"></div></div>
 <div class="overview-grid">
   <div class="card hero"><div><div class="label">Safe to spend today</div><div class="amount-big"><span id="availableToday">0</span> <span class="currency">DKK</span></div><div class="muted">Groceries and everyday spending.</div><div style="height:14px"></div><span class="badge" id="trackBadge">On track</span></div><div class="ringwrap"><div class="ring" id="dailyRing"></div><div class="ringtext"><span id="dailyPercent">0%</span><small>used today</small></div></div></div>
@@ -93,15 +93,19 @@
   </div>
 </div>
 
-<footer>Every number recalculates as money moves.<br>Protect tomorrow · free today.<br><strong>Version 3.7 · orient first</strong></footer></div>
+<footer>Every number recalculates as money moves.<br>Protect tomorrow · free today.<br><strong>Version 3.8 · orient first</strong></footer></div>
 <script>
-const INITIAL={currentCash:17303.52,dailyBudget:350,weeklyBudget:1842,manualToday:43,pots:[{name:"Food until 12 August",remaining:5814.52},{name:"Liam",remaining:371},{name:"Norah allowance",remaining:600},{name:"Travel",remaining:5000}],entries:[{id:1,date:"2026-07-25",name:"Nordic Culture Fund",category:"Grant",type:"in",status:"scheduled",originalAmount:5000,currency:"DKK",dkkAmount:5000,rate:1,rateDate:null},{id:2,date:"2026-07-25",name:"First rent",category:"Rent",type:"out",status:"scheduled",originalAmount:13000,currency:"DKK",dkkAmount:13000,rate:1,rateDate:null},{id:3,date:"2026-08-12",name:"UiT salary",category:"Salary",type:"in",status:"scheduled",originalAmount:22500,currency:"DKK",dkkAmount:22500,rate:1,rateDate:null},{id:4,date:"2026-08-12",name:"Second rent",category:"Rent",type:"out",status:"scheduled",originalAmount:12000,currency:"DKK",dkkAmount:12000,rate:1,rateDate:null},{id:5,date:"2026-08-15",name:"Reimbursement",category:"Reimbursement",type:"in",status:"scheduled",originalAmount:2000,currency:"DKK",dkkAmount:2000,rate:1,rateDate:null},{id:6,date:"2026-08-15",name:"Norah school",category:"Children",type:"out",status:"scheduled",originalAmount:2750,currency:"DKK",dkkAmount:2750,rate:1,rateDate:null},{id:7,date:"2026-08-15",name:"Furniture",category:"Home",type:"out",status:"scheduled",originalAmount:2500,currency:"DKK",dkkAmount:2500,rate:1,rateDate:null}]};
+const INITIAL={currentCash:18950,dailyBudget:350,weeklyBudget:1842,manualToday:43,pots:[{name:"Food until 12 August",remaining:5814.52},{name:"Liam",remaining:371},{name:"Norah allowance",remaining:600},{name:"Travel",remaining:5000}],entries:[{id:1,date:"2026-07-25",name:"Nordic Culture Fund",category:"Grant",type:"in",status:"scheduled",originalAmount:5000,currency:"DKK",dkkAmount:5000,rate:1,rateDate:null},{id:2,date:"2026-07-25",name:"First rent",category:"Rent",type:"out",status:"scheduled",originalAmount:13000,currency:"DKK",dkkAmount:13000,rate:1,rateDate:null},{id:3,date:"2026-08-12",name:"UiT salary",category:"Salary",type:"in",status:"scheduled",originalAmount:22500,currency:"DKK",dkkAmount:22500,rate:1,rateDate:null},{id:4,date:"2026-08-12",name:"Second rent",category:"Rent",type:"out",status:"scheduled",originalAmount:12000,currency:"DKK",dkkAmount:12000,rate:1,rateDate:null},{id:5,date:"2026-08-15",name:"Reimbursement",category:"Reimbursement",type:"in",status:"scheduled",originalAmount:2000,currency:"DKK",dkkAmount:2000,rate:1,rateDate:null},{id:6,date:"2026-08-15",name:"Norah school",category:"Children",type:"out",status:"scheduled",originalAmount:2750,currency:"DKK",dkkAmount:2750,rate:1,rateDate:null},{id:7,date:"2026-08-15",name:"Furniture",category:"Home",type:"out",status:"scheduled",originalAmount:2500,currency:"DKK",dkkAmount:2500,rate:1,rateDate:null}]};
 const clone=x=>JSON.parse(JSON.stringify(x));let state;try{state=JSON.parse(localStorage.getItem("compassMoneyV35")||localStorage.getItem("compassMoneyV34")||localStorage.getItem("compassMoneyV33")||localStorage.getItem("compassMoneyV3")||localStorage.getItem("compassMoneyV2"))||clone(INITIAL)}catch(e){state=clone(INITIAL)}let entryType="out";
 function migrateState(){
  state.pots=(state.pots||[]).map((p,i)=>({id:p.id||Date.now()+i,name:p.name||"Protected pot",remaining:Number(p.remaining||0),date:p.date||""}));
  state.entries=(state.entries||[]).map((e,i)=>({...e,id:e.id||Date.now()+100+i,date:e.date||todayKey()}));
 }
 migrateState();
+if(localStorage.getItem("compassBalanceCorrectionV38")!=="applied"){
+ state.currentCash=18950;
+ localStorage.setItem("compassBalanceCorrectionV38","applied");
+}
 function parseMoneyInput(value){
  let text=String(value??"").trim().replace(/\s/g,"").replace(/DKK/gi,"").replace(/kr\.?/gi,"").replace(/,-$/,"");
  if(!text)return 0;
