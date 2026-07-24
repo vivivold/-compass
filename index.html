@@ -104,7 +104,12 @@ body{overflow-x:hidden}.app,.card,details,.modal{min-width:0}.weektop>*{min-widt
   </div>
 </div>
 
-<footer>Every number recalculates as money moves.<br>Protect tomorrow · free today.<br><strong>Version 5.1 · one living system</strong></footer></div>
+<div class="card" style="border-color:#b7d9ca;background:var(--green2)">
+  <strong style="font-size:20px">Connect these iPhone numbers to Compass Web</strong>
+  <p style="color:#52635b;line-height:1.45">Move your saved account balance, paid expenses, income, and protected pots into the private shared Compass.</p>
+  <button class="primary" style="width:100%" onclick="transferToConnectedCompass()">Move my current numbers</button>
+</div>
+<footer>Every number recalculates as money moves.<br>Protect tomorrow · free today.<br><strong>Version 5.2 · ready to connect</strong></footer></div>
 <script>
 const INITIAL={currentCash:18950,dailyBudget:350,weeklyBudget:1842,manualToday:0,pots:[{name:"Food until 12 August",remaining:5814.52},{name:"Liam",remaining:371},{name:"Norah allowance",remaining:600}],entries:[{id:1,date:"2026-07-25",name:"Nordic Culture Fund",category:"Grant",type:"in",status:"scheduled",originalAmount:5000,currency:"DKK",dkkAmount:5000,rate:1,rateDate:null},{id:2,date:"2026-07-25",name:"First rent",category:"Rent",type:"out",status:"scheduled",originalAmount:13000,currency:"DKK",dkkAmount:13000,rate:1,rateDate:null},{id:3,date:"2026-08-12",name:"UiT salary",category:"Salary",type:"in",status:"scheduled",originalAmount:22500,currency:"DKK",dkkAmount:22500,rate:1,rateDate:null},{id:4,date:"2026-08-12",name:"Second rent",category:"Rent",type:"out",status:"scheduled",originalAmount:12000,currency:"DKK",dkkAmount:12000,rate:1,rateDate:null},{id:5,date:"2026-08-15",name:"Reimbursement",category:"Reimbursement",type:"in",status:"scheduled",originalAmount:2000,currency:"DKK",dkkAmount:2000,rate:1,rateDate:null},{id:6,date:"2026-08-15",name:"Norah school",category:"Children",type:"out",status:"scheduled",originalAmount:2750,currency:"DKK",dkkAmount:2750,rate:1,rateDate:null},{id:7,date:"2026-08-15",name:"Furniture",category:"Home",type:"out",status:"scheduled",originalAmount:2500,currency:"DKK",dkkAmount:2500,rate:1,rateDate:null}]};
 const clone=x=>JSON.parse(JSON.stringify(x));let state;try{state=JSON.parse(localStorage.getItem("compassMoneyV35")||localStorage.getItem("compassMoneyV34")||localStorage.getItem("compassMoneyV33")||localStorage.getItem("compassMoneyV3")||localStorage.getItem("compassMoneyV2"))||clone(INITIAL)}catch(e){state=clone(INITIAL)}let entryType="out";
@@ -410,6 +415,14 @@ function render(){
  renderLedger();renderCashflowPressure();renderThreeDayForecast();save();
 }
 function exportBackup(){const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="compass-backup.json";a.click();URL.revokeObjectURL(a.href)}
+function transferToConnectedCompass(){
+ save();
+ const bytes=new TextEncoder().encode(JSON.stringify(state));
+ let binary="";
+ bytes.forEach(byte=>{binary+=String.fromCharCode(byte)});
+ const encoded=btoa(binary);
+ location.href=`https://vivi-compass-cashflow.vivivold.chatgpt.site/pwa-app/index.html#transfer=${encodeURIComponent(encoded)}`;
+}
 document.getElementById("restoreFile").addEventListener("change",async e=>{
  const file=e.target.files[0];if(!file)return;
  try{const restored=JSON.parse(await file.text());if(!restored||!Array.isArray(restored.entries)||!Array.isArray(restored.pots))throw new Error();state=restored;render();alert("Compass backup restored.");}
