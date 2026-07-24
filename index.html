@@ -14,16 +14,18 @@
 .timeline-date{font-size:13px;font-weight:760;color:var(--green);margin-top:15px}
 .timeline-balance{font-size:12px;color:var(--muted);text-align:right;margin-top:4px}
 .due-pill{display:inline-block;background:#f4f1eb;color:#68717b;padding:5px 9px;border-radius:999px;font-size:12px;margin-top:5px}
-.warningbox{background:#fbf2e8;border-radius:15px;padding:13px;margin-top:12px;color:#73593b;font-size:14px;line-height:1.45}@media(max-width:700px){.app{padding-left:16px;padding-right:16px}.overview-grid{grid-template-columns:1fr}.bank-card{min-height:235px}.bank-amount{font-size:60px}.amount-big{font-size:50px}.ringwrap{display:none}.row.stack{flex-direction:column}.row.stack>*{width:100%}.forecast-row{grid-template-columns:62px 1fr auto;gap:8px;padding-left:22px}.forecast-balance{font-size:15px}}
+.warningbox{background:#fbf2e8;border-radius:15px;padding:13px;margin-top:12px;color:#73593b;font-size:14px;line-height:1.45}
+body{overflow-x:hidden}.app,.card,details,.modal{min-width:0}.weektop>*{min-width:0}.today-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px}.today-number{font-size:34px;font-weight:780}.quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.quick-actions button{padding:16px}.section-title{font-size:22px;font-weight:780;margin:0}.inline-metric{text-align:right;white-space:nowrap}.forecast-wrap{max-height:470px;overflow:auto;padding-right:2px}.forecast-row>*{min-width:0}.forecast-note{overflow-wrap:anywhere}.forecast-balance{white-space:nowrap}.compact-bank{min-height:auto}.compact-bank .bank-amount{font-size:48px;letter-spacing:-2px}.tools-label{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin:25px 4px 10px}
+@media(max-width:700px){.app{width:100%;max-width:100%;padding-left:14px;padding-right:14px}.card{padding:19px;margin:12px 0;border-radius:22px}.overview-grid{grid-template-columns:1fr}.bank-card{min-height:auto}.bank-amount{font-size:46px;letter-spacing:-2px}.amount-big{font-size:52px}.ringwrap{display:none}.row.stack{flex-direction:column}.row.stack>*{width:100%}.forecast-row{grid-template-columns:54px minmax(0,1fr);gap:8px;padding:10px 8px 10px 20px}.forecast-balance{grid-column:2;text-align:left;font-size:16px}.weeknum{font-size:clamp(27px,8vw,34px)}.weektop{align-items:flex-end}.today-head{align-items:flex-start}.brand{font-size:26px}.date{font-size:13px}.bank-facts{gap:12px;justify-content:space-between}.bank-facts>div{min-width:0}.bank-facts strong{font-size:16px}.item{align-items:flex-start}.item-money{white-space:normal}.actions{flex-wrap:wrap}.modal-backdrop{padding:8px}.modal{padding:19px;border-radius:22px}}
 </style></head>
 <body><div class="app">
-<header><div class="brand"><span class="dot"></span>Compass</div><div style="text-align:right"><div class="date" id="todayDate"></div><div style="margin-top:4px;font-size:11px;font-weight:750;color:var(--green)">VERSION 4.0</div></div></header>
+<header><div class="brand"><span class="dot"></span>Compass</div><div style="text-align:right"><div class="date" id="todayDate"></div><div style="margin-top:4px;font-size:11px;font-weight:750;color:var(--green)">VERSION 5.0</div></div></header>
 <div class="card hero"><div><div class="label">Safe to spend today</div><div class="amount-big"><span id="availableToday">0</span> <span class="currency">DKK</span></div><div class="muted">Groceries and everyday spending.</div><div style="height:14px"></div><span class="badge" id="trackBadge">On track</span></div><div class="ringwrap"><div class="ring" id="dailyRing"></div><div class="ringtext"><span id="dailyPercent">0%</span><small>used today</small></div></div></div>
 <div class="card"><div class="weektop"><div><div class="label">This week</div><div class="weeknum"><span id="weekLeft">0</span> <span class="currency" style="font-size:18px">DKK left</span></div></div><div style="text-align:right"><div class="label">Used</div><div class="weeknum" id="weekUsed">0</div></div></div><div class="progress"><div id="weekProgress"></div></div><div class="split muted"><span>of <span id="weekBudgetView">0</span> DKK</span><span><span id="daysLeft">0</span> days left</span></div></div>
-<details open><summary>Today’s spending</summary><div class="inside"><div class="split"><span>Used today</span><strong id="todayUsedView"></strong></div><div style="height:12px"></div><label class="label">Change today’s total manually</label><div class="row" style="margin-top:8px"><input id="manualToday" type="number" inputmode="decimal"><button class="soft" onclick="saveManualToday()">Save</button></div><div id="todayList" style="margin-top:12px"></div></div></details>
-<div class="card"><div class="weektop"><div><div class="label">Every three days</div><div class="weeknum">What will really be there</div></div><div class="muted" style="text-align:right">real account money</div></div><div class="forecast" id="forecastList"></div></div>
-<div class="card bank-card"><div><div class="label">In your account now</div><div class="bank-amount"><span id="currentBankHero">0</span> <span class="currency">DKK</span></div><div class="row"><span class="badge" id="pressureBadge">Cashflow is comfortable</span><button class="ghost" onclick="editCurrentBalance()">Update balance</button></div></div><div class="bank-facts"><div><span class="muted">Still protected</span><strong id="protectedHero">0</strong></div><div><span class="muted">Genuinely free</span><strong id="freeHero">0</strong></div></div></div>
-<div class="card"><div class="tabs"><button id="expenseTab" class="tab active" onclick="setEntryType('out')">Money out</button><button id="incomeTab" class="tab" onclick="setEntryType('in')">Money in</button></div><h3 id="entryHeading" style="margin-top:0">Add an expense</h3><div class="row stack"><input id="entryAmount" type="number" inputmode="decimal" placeholder="Amount"><select id="entryCurrency"><option>DKK</option><option>EUR</option><option>NOK</option><option>SEK</option><option>USD</option><option>GBP</option></select></div><div style="height:10px"></div><div class="row stack"><select id="entryCategory"></select><input id="entryDate" type="date"></div><div style="height:10px"></div><input id="entryNote" placeholder="Note, e.g. reimbursement from project"><div id="conversionBox" class="ratebox hidden"></div><div style="height:10px"></div><button id="addButton" class="primary" style="width:100%" onclick="previewAndAdd()">Convert and add</button></div>
+<div class="card"><div class="today-head"><div><div class="label">Spent today</div><div class="today-number" id="todayUsedView"></div></div><div class="inline-metric"><div class="label">Left today</div><strong id="todayLeftView"></strong></div></div><div id="todayList" style="margin-top:12px"></div><div class="quick-actions"><button class="primary" onclick="openEntryComposer('out')">Add expense</button><button class="soft" onclick="openEntryComposer('in')">Add income</button></div></div>
+<div class="card"><div class="weektop"><div><div class="label">Every three days</div><div class="section-title">What will really be there</div></div><div class="muted" style="text-align:right">real account money</div></div><div class="forecast-wrap"><div class="forecast" id="forecastList"></div></div></div>
+<div class="card bank-card compact-bank"><div><div class="label">In your account now</div><div class="bank-amount"><span id="currentBankHero">0</span> <span class="currency">DKK</span></div><div class="row"><span class="badge" id="pressureBadge">Cashflow is comfortable</span><button class="ghost" onclick="editCurrentBalance()">Reconcile</button></div></div><div class="bank-facts"><div><span class="muted">Still protected</span><strong id="protectedHero">0</strong></div><div><span class="muted">Genuinely free</span><strong id="freeHero">0</strong></div></div></div>
+<div class="tools-label">Plan and manage</div>
 <details><summary>Money in and out</summary><div class="inside"><div class="row stack"><select id="filterType" onchange="renderLedger()"><option value="all">Everything</option><option value="in">Money in</option><option value="out">Money out</option></select><select id="filterStatus" onchange="renderLedger()"><option value="all">Received and scheduled</option><option value="received">Received / paid</option><option value="scheduled">Scheduled</option></select></div><div id="ledgerList" style="margin-top:10px"></div></div></details>
 <details><summary>Upcoming income & payments</summary><div class="inside" id="upcomingList"></div></details>
 <details><summary>Protected pots</summary><div class="inside">
@@ -44,7 +46,7 @@
 <div class="item"><span>Payments in the next 7 days</span><strong id="next7OutView"></strong></div>
 <div class="item"><span>Lowest projected free balance</span><strong id="lowestBalanceView"></strong></div>
 <div class="item"><span>Lowest-balance date</span><strong id="lowestDateView"></strong></div><div class="item"><span>Expected final bank balance</span><strong id="finalCashView"></strong></div><div class="item"><span>Expected final free balance</span><strong class="total" id="finalFreeCashView"></strong></div></div></details>
-<details><summary>Settings</summary><div class="inside"><label class="label">Current bank balance</label><input id="currentCashInput" type="number" inputmode="decimal"><div style="height:10px"></div><label class="label">Daily budget</label><input id="dailyBudgetInput" type="number" inputmode="decimal"><div style="height:10px"></div><label class="label">Weekly budget</label><input id="weeklyBudgetInput" type="number" inputmode="decimal"><div style="height:12px"></div><button class="primary" onclick="saveSettings()">Save settings</button><div style="height:12px"></div>
+<details><summary>Settings</summary><div class="inside"><label class="label">Current bank balance</label><input id="currentCashInput" type="number" inputmode="decimal"><div style="height:10px"></div><label class="label">Unlogged spending today</label><input id="manualToday" type="number" inputmode="decimal"><div class="tiny" style="margin-top:5px">Use this when your bank balance includes spending that has no transaction in Compass.</div><div style="height:10px"></div><label class="label">Daily spending guide</label><input id="dailyBudgetInput" type="number" inputmode="decimal"><div style="height:10px"></div><label class="label">Weekly spending guide</label><input id="weeklyBudgetInput" type="number" inputmode="decimal"><div style="height:12px"></div><button class="primary" onclick="saveSettings()">Save settings</button><div style="height:12px"></div>
     <button class="soft" onclick="exportBackup()">Export backup</button>
     <div style="height:10px"></div>
     <label class="soft" style="display:block;text-align:center;border-radius:15px;padding:14px 17px;cursor:pointer">
@@ -52,6 +54,20 @@
       <input id="restoreFile" type="file" accept=".json" style="display:none">
     </label>
     <p class="tiny">Foreign currency rates are retrieved online and stored with every entry. Bank and Revolut settlement amounts can be corrected through Edit.</p></div></details>
+
+<div id="composerModal" class="modal-backdrop hidden" onclick="backdropClose(event,'composerModal')">
+  <div class="modal">
+    <div class="modal-head"><h2 id="entryHeading">Add an expense</h2><button class="close" onclick="closeModal('composerModal')">Close</button></div>
+    <div class="tabs"><button id="expenseTab" class="tab active" onclick="setEntryType('out')">Expense</button><button id="incomeTab" class="tab" onclick="setEntryType('in')">Income</button></div>
+    <div class="row"><input id="entryAmount" type="number" inputmode="decimal" placeholder="Amount"><select id="entryCurrency"><option>DKK</option><option>EUR</option><option>NOK</option><option>SEK</option><option>USD</option><option>GBP</option></select></div>
+    <div class="row stack" style="margin-top:10px"><select id="entryCategory"></select><input id="entryDate" type="date"></div>
+    <div id="potField" class="field"><label>Take this from</label><select id="entryPot"></select></div>
+    <div class="field"><label>When does it move?</label><select id="entryStatus"><option value="received">Already moved in my account</option><option value="scheduled">Scheduled for this date</option></select></div>
+    <div class="field"><label>What is it?</label><input id="entryNote" placeholder="Groceries, salary, reimbursement…"></div>
+    <div id="conversionBox" class="ratebox hidden"></div>
+    <button id="addButton" class="primary" style="width:100%;margin-top:12px" onclick="previewAndAdd()">Add expense</button>
+  </div>
+</div>
 
 <div id="entryModal" class="modal-backdrop hidden" onclick="backdropClose(event,'entryModal')">
   <div class="modal">
@@ -71,6 +87,7 @@
       <div class="field"><label>Direction</label><select id="editEntryType"><option value="out">Money out</option><option value="in">Money in</option></select></div>
       <div class="field"><label>Status</label><select id="editEntryStatus"><option value="scheduled">Scheduled</option><option value="received">Received / paid</option></select></div>
     </div>
+    <div class="field"><label>Protected pot</label><select id="editEntryPot"></select></div>
     <button class="primary" style="width:100%;margin-top:18px" onclick="saveEntryEdit()">Save changes</button>
   </div>
 </div>
@@ -81,23 +98,25 @@
     <input id="editPotId" type="hidden">
     <div class="field"><label>Pot name</label><input id="editPotName"></div>
     <div class="field"><label>Amount currently remaining</label><input id="editPotAmount" type="text" inputmode="decimal" placeholder="Example: 5.814,52"></div>
-    <div class="field">
-      <label>Money used from this pot</label>
-      <input id="editPotUsed" type="text" inputmode="decimal" placeholder="Example: 878,-">
-      <div class="tiny" style="margin-top:6px">Compass subtracts this amount from the remaining pot balance.</div>
-    </div>
+    <div class="ratebox">To spend from this pot, use <strong>Add expense</strong> and choose the pot. Compass will update the account, pot, daily amount, weekly amount, and forecast together.</div>
     <div class="field"><label>Target or use-by date</label><input id="editPotDate" type="date"></div>
     <button class="primary" style="width:100%;margin-top:18px" onclick="savePotEdit()">Save pot</button>
   </div>
 </div>
 
-<footer>Every number recalculates as money moves.<br>Protect tomorrow · free today.<br><strong>Version 4.0 · today and week first</strong></footer></div>
+<footer>Every number recalculates as money moves.<br>Protect tomorrow · free today.<br><strong>Version 5.0 · one living system</strong></footer></div>
 <script>
-const INITIAL={currentCash:18950,dailyBudget:350,weeklyBudget:1842,manualToday:43,pots:[{name:"Food until 12 August",remaining:5814.52},{name:"Liam",remaining:371},{name:"Norah allowance",remaining:600},{name:"Travel",remaining:5000}],entries:[{id:1,date:"2026-07-25",name:"Nordic Culture Fund",category:"Grant",type:"in",status:"scheduled",originalAmount:5000,currency:"DKK",dkkAmount:5000,rate:1,rateDate:null},{id:2,date:"2026-07-25",name:"First rent",category:"Rent",type:"out",status:"scheduled",originalAmount:13000,currency:"DKK",dkkAmount:13000,rate:1,rateDate:null},{id:3,date:"2026-08-12",name:"UiT salary",category:"Salary",type:"in",status:"scheduled",originalAmount:22500,currency:"DKK",dkkAmount:22500,rate:1,rateDate:null},{id:4,date:"2026-08-12",name:"Second rent",category:"Rent",type:"out",status:"scheduled",originalAmount:12000,currency:"DKK",dkkAmount:12000,rate:1,rateDate:null},{id:5,date:"2026-08-15",name:"Reimbursement",category:"Reimbursement",type:"in",status:"scheduled",originalAmount:2000,currency:"DKK",dkkAmount:2000,rate:1,rateDate:null},{id:6,date:"2026-08-15",name:"Norah school",category:"Children",type:"out",status:"scheduled",originalAmount:2750,currency:"DKK",dkkAmount:2750,rate:1,rateDate:null},{id:7,date:"2026-08-15",name:"Furniture",category:"Home",type:"out",status:"scheduled",originalAmount:2500,currency:"DKK",dkkAmount:2500,rate:1,rateDate:null}]};
+const INITIAL={currentCash:18950,dailyBudget:350,weeklyBudget:1842,manualToday:0,pots:[{name:"Food until 12 August",remaining:5814.52},{name:"Liam",remaining:371},{name:"Norah allowance",remaining:600}],entries:[{id:1,date:"2026-07-25",name:"Nordic Culture Fund",category:"Grant",type:"in",status:"scheduled",originalAmount:5000,currency:"DKK",dkkAmount:5000,rate:1,rateDate:null},{id:2,date:"2026-07-25",name:"First rent",category:"Rent",type:"out",status:"scheduled",originalAmount:13000,currency:"DKK",dkkAmount:13000,rate:1,rateDate:null},{id:3,date:"2026-08-12",name:"UiT salary",category:"Salary",type:"in",status:"scheduled",originalAmount:22500,currency:"DKK",dkkAmount:22500,rate:1,rateDate:null},{id:4,date:"2026-08-12",name:"Second rent",category:"Rent",type:"out",status:"scheduled",originalAmount:12000,currency:"DKK",dkkAmount:12000,rate:1,rateDate:null},{id:5,date:"2026-08-15",name:"Reimbursement",category:"Reimbursement",type:"in",status:"scheduled",originalAmount:2000,currency:"DKK",dkkAmount:2000,rate:1,rateDate:null},{id:6,date:"2026-08-15",name:"Norah school",category:"Children",type:"out",status:"scheduled",originalAmount:2750,currency:"DKK",dkkAmount:2750,rate:1,rateDate:null},{id:7,date:"2026-08-15",name:"Furniture",category:"Home",type:"out",status:"scheduled",originalAmount:2500,currency:"DKK",dkkAmount:2500,rate:1,rateDate:null}]};
 const clone=x=>JSON.parse(JSON.stringify(x));let state;try{state=JSON.parse(localStorage.getItem("compassMoneyV35")||localStorage.getItem("compassMoneyV34")||localStorage.getItem("compassMoneyV33")||localStorage.getItem("compassMoneyV3")||localStorage.getItem("compassMoneyV2"))||clone(INITIAL)}catch(e){state=clone(INITIAL)}let entryType="out";
 function migrateState(){
  state.pots=(state.pots||[]).map((p,i)=>({id:p.id||Date.now()+i,name:p.name||"Protected pot",remaining:Number(p.remaining||0),date:p.date||""}));
- state.entries=(state.entries||[]).map((e,i)=>({...e,id:e.id||Date.now()+100+i,date:e.date||todayKey()}));
+ if(Number(state.schemaVersion||0)<5)state.pots=state.pots.filter(p=>!(p.name==="Travel"&&Number(p.remaining||0)===5000));
+ state.entries=(state.entries||[]).map((e,i)=>({...e,id:e.id||Date.now()+100+i,date:e.date||new Date().toISOString().slice(0,10),potId:e.potId||"",potSpend:Number(e.potSpend||0)}));
+ state.adjustments=state.adjustments||{};
+ const migrationDate="2026-07-23";
+ if(state.manualToday&&state.adjustments[migrationDate]===undefined)state.adjustments[migrationDate]=Number(state.manualToday||0);
+ delete state.manualToday;
+ state.schemaVersion=5;
 }
 migrateState();
 if(localStorage.getItem("compassBalanceCorrectionV38")!=="applied"){
@@ -122,11 +141,46 @@ const prettyDate=v=>v?new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"shor
 const addDays=(v,n)=>{const d=dateObj(v);d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)};
 const endOfNext7=()=>addDays(todayKey(),7);
 document.getElementById("entryDate").value=todayKey();
-function save(){localStorage.setItem("compassMoneyV35",JSON.stringify(state))}function receivedEntries(){return state.entries.filter(x=>x.status==="received")}function todayExpenseTotal(){return receivedEntries().filter(x=>x.type==="out"&&x.date===todayKey()).reduce((s,x)=>s+x.dkkAmount,0)}function usedToday(){return Number(state.manualToday||0)+todayExpenseTotal()}function daysRemainingInWeek(){const d=new Date().getDay();return d===0?1:8-d}function categoriesFor(type){return type==="in"?["Reimbursement","Salary","Grant","Refund","Transfer","Gift","Other income"]:["Groceries","Transport","Coffee","Food out","Rent","Home","Children","Shopping","Travel","Other"]}
-function setEntryType(type){entryType=type;document.getElementById("expenseTab").classList.toggle("active",type==="out");document.getElementById("incomeTab").classList.toggle("active",type==="in");document.getElementById("entryHeading").textContent=type==="in"?"Add money received":"Add an expense";document.getElementById("entryCategory").innerHTML=categoriesFor(type).map(c=>`<option>${c}</option>`).join("");document.getElementById("conversionBox").classList.add("hidden")}setEntryType("out");
+function save(){localStorage.setItem("compassMoneyV35",JSON.stringify(state))}
+function receivedEntries(){return state.entries.filter(x=>x.status==="received")}
+function todayExpenseTotal(){return receivedEntries().filter(x=>x.type==="out"&&x.date===todayKey()).reduce((s,x)=>s+Number(x.dkkAmount||0),0)}
+function adjustmentFor(date){return Number((state.adjustments||{})[date]||0)}
+function usedToday(){return adjustmentFor(todayKey())+todayExpenseTotal()}
+function startOfWeek(date=todayKey()){const d=dateObj(date),day=d.getDay()||7;d.setDate(d.getDate()-day+1);return d.toISOString().slice(0,10)}
+function endOfWeek(date=todayKey()){return addDays(startOfWeek(date),6)}
+function usedThisWeek(){const start=startOfWeek(),end=endOfWeek();const entries=receivedEntries().filter(x=>x.type==="out"&&x.date>=start&&x.date<=end).reduce((s,x)=>s+Number(x.dkkAmount||0),0);const adjustments=Object.entries(state.adjustments||{}).filter(([date])=>date>=start&&date<=end).reduce((s,[,amount])=>s+Number(amount||0),0);return entries+adjustments}
+function daysRemainingInWeek(){return Math.max(1,Math.round((dateObj(endOfWeek())-dateObj(todayKey()))/86400000)+1)}
+function categoriesFor(type){return type==="in"?["Reimbursement","Salary","Grant","Refund","Transfer","Gift","Other income"]:["Groceries","Transport","Coffee","Food out","Rent","Home","Children","Shopping","Travel","Other"]}
+function potOptions(selected=""){return `<option value="">Free money</option>`+state.pots.map(p=>`<option value="${p.id}" ${String(p.id)===String(selected)?"selected":""}>${escapeHtml(p.name)} · ${money(p.remaining)}</option>`).join("")}
+function refreshPotMenus(selected=""){document.getElementById("entryPot").innerHTML=potOptions(selected);document.getElementById("editEntryPot").innerHTML=potOptions(selected)}
+function setEntryType(type){entryType=type;document.getElementById("expenseTab").classList.toggle("active",type==="out");document.getElementById("incomeTab").classList.toggle("active",type==="in");document.getElementById("entryHeading").textContent=type==="in"?"Add income":"Add an expense";document.getElementById("entryCategory").innerHTML=categoriesFor(type).map(c=>`<option>${c}</option>`).join("");document.getElementById("potField").classList.toggle("hidden",type==="in");document.getElementById("addButton").textContent=type==="in"?"Add income":"Add expense";document.getElementById("conversionBox").classList.add("hidden")}
+function openEntryComposer(type){setEntryType(type);refreshPotMenus();document.getElementById("entryDate").value=todayKey();document.getElementById("entryStatus").value="received";openModal("composerModal")}
+setEntryType("out");
 async function getRate(from){if(from==="DKK")return{rate:1,date:todayKey(),source:"DKK"};const cacheKey="rate_"+from+"_DKK";try{const response=await fetch(`https://api.frankfurter.dev/v2/rates?base=${encodeURIComponent(from)}&quotes=DKK`);if(!response.ok)throw new Error("rate");const data=await response.json();const row=Array.isArray(data)?data.find(x=>x.quote==="DKK"):null;if(!row||!row.rate)throw new Error("rate");const result={rate:Number(row.rate),date:row.date,source:"Frankfurter central-bank data"};localStorage.setItem(cacheKey,JSON.stringify(result));return result}catch(e){const cached=localStorage.getItem(cacheKey);if(cached)return{...JSON.parse(cached),source:"Last saved central-bank rate"};throw new Error("Compass could not retrieve a rate. Connect to the internet or enter DKK.")}}
-async function previewAndAdd(){const amount=Number(document.getElementById("entryAmount").value),currency=document.getElementById("entryCurrency").value,category=document.getElementById("entryCategory").value,date=document.getElementById("entryDate").value||todayKey(),note=document.getElementById("entryNote").value.trim();if(!(amount>0)){alert("Enter an amount first.");return}const button=document.getElementById("addButton");button.disabled=true;button.textContent="Checking rate…";try{const r=await getRate(currency),dkk=Math.round(amount*r.rate*100)/100,box=document.getElementById("conversionBox");box.classList.remove("hidden");box.innerHTML=`<strong>${fmt(amount)} ${currency} = ${money(dkk)}</strong><br>Rate: 1 ${currency} = ${fmt(r.rate)} DKK · ${r.date}<br>${r.source}`;const received=confirm(entryType==="in"?"Has this money already arrived in your account? Press OK for received, or Cancel for expected later.":"Has this payment already left your account? Press OK for paid, or Cancel for scheduled later.");const entry={id:Date.now(),date,name:note||category,category,type:entryType,status:received?"received":"scheduled",originalAmount:amount,currency,dkkAmount:dkk,rate:r.rate,rateDate:r.date,rateSource:r.source};state.entries.push(entry);if(received)state.currentCash+=entryType==="in"?dkk:-dkk;document.getElementById("entryAmount").value="";document.getElementById("entryNote").value="";render()}catch(e){alert(e.message)}finally{button.disabled=false;button.textContent="Convert and add"}}
-function toggleStatus(id){const x=state.entries.find(e=>e.id===id);if(!x)return;if(x.status==="scheduled"){x.status="received";state.currentCash+=x.type==="in"?x.dkkAmount:-x.dkkAmount}else{x.status="scheduled";state.currentCash-=x.type==="in"?x.dkkAmount:-x.dkkAmount}render()}function openModal(id){document.getElementById(id).classList.remove("hidden");document.body.style.overflow="hidden"}
+function applyReceivedEffect(entry,direction){
+ if(entry.status!=="received")return;
+ state.currentCash+=direction*(entry.type==="in"?Number(entry.dkkAmount||0):-Number(entry.dkkAmount||0));
+ if(entry.type==="out"&&entry.potId){
+  const pot=state.pots.find(p=>String(p.id)===String(entry.potId));
+  if(pot&&direction===1){entry.potSpend=Math.min(Number(pot.remaining||0),Number(entry.dkkAmount||0));pot.remaining=Math.max(0,Number(pot.remaining||0)-entry.potSpend)}
+  if(pot&&direction===-1){pot.remaining=Number(pot.remaining||0)+Number(entry.potSpend||0);entry.potSpend=0}
+ }
+}
+async function previewAndAdd(){
+ const amount=parseMoneyInput(document.getElementById("entryAmount").value),currency=document.getElementById("entryCurrency").value,category=document.getElementById("entryCategory").value,date=document.getElementById("entryDate").value||todayKey(),note=document.getElementById("entryNote").value.trim(),status=document.getElementById("entryStatus").value,potId=entryType==="out"?document.getElementById("entryPot").value:"";
+ if(!(amount>0)){alert("Enter an amount first.");return}
+ const button=document.getElementById("addButton");button.disabled=true;button.textContent="Adding…";
+ try{
+  const r=await getRate(currency),dkk=Math.round(amount*r.rate*100)/100,box=document.getElementById("conversionBox");
+  if(currency!=="DKK"){box.classList.remove("hidden");box.innerHTML=`<strong>${fmt(amount)} ${currency} = ${money(dkk)}</strong><br>Rate: 1 ${currency} = ${fmt(r.rate)} DKK · ${r.date}`}
+  const entry={id:Date.now(),date,name:note||category,category,type:entryType,status,originalAmount:amount,currency,dkkAmount:dkk,rate:r.rate,rateDate:r.date,rateSource:r.source,potId,potSpend:0};
+  state.entries.push(entry);applyReceivedEffect(entry,1);
+  document.getElementById("entryAmount").value="";document.getElementById("entryNote").value="";closeModal("composerModal");render()
+ }catch(e){alert(e.message)}
+ finally{button.disabled=false;button.textContent=entryType==="in"?"Add income":"Add expense"}
+}
+function toggleStatus(id){const x=state.entries.find(e=>e.id===id);if(!x)return;if(x.status==="scheduled"){x.status="received";applyReceivedEffect(x,1)}else{applyReceivedEffect(x,-1);x.status="scheduled"}render()}
+function openModal(id){document.getElementById(id).classList.remove("hidden");document.body.style.overflow="hidden"}
 function closeModal(id){document.getElementById(id).classList.add("hidden");document.body.style.overflow=""}
 function backdropClose(event,id){if(event.target.id===id)closeModal(id)}
 function editEntry(id){
@@ -140,12 +194,14 @@ function editEntry(id){
  document.getElementById("editEntryDkk").value=x.dkkAmount||0;
  document.getElementById("editEntryType").value=x.type||"out";
  document.getElementById("editEntryStatus").value=x.status||"scheduled";
+ refreshPotMenus(x.potId||"");
+ document.getElementById("editEntryPot").value=x.potId||"";
  openModal("entryModal");
 }
 function saveEntryEdit(){
  const id=Number(document.getElementById("editEntryId").value);
  const x=state.entries.find(e=>e.id===id);if(!x)return;
- const oldEffect=x.status==="received"?(x.type==="in"?x.dkkAmount:-x.dkkAmount):0;
+ applyReceivedEffect(x,-1);
  x.name=document.getElementById("editEntryName").value.trim()||x.category||"Money item";
  x.date=document.getElementById("editEntryDate").value||todayKey();
  x.category=document.getElementById("editEntryCategory").value.trim()||"Other";
@@ -154,11 +210,12 @@ function saveEntryEdit(){
  x.dkkAmount=Math.max(0,Number(document.getElementById("editEntryDkk").value)||0);
  x.type=document.getElementById("editEntryType").value;
  x.status=document.getElementById("editEntryStatus").value;
- const newEffect=x.status==="received"?(x.type==="in"?x.dkkAmount:-x.dkkAmount):0;
- state.currentCash+=newEffect-oldEffect;
+ x.potId=x.type==="out"?document.getElementById("editEntryPot").value:"";
+ x.potSpend=0;
+ applyReceivedEffect(x,1);
  closeModal("entryModal");render();
 }
-function deleteEntry(id){const i=state.entries.findIndex(e=>e.id===id);if(i<0)return;const x=state.entries[i];if(!confirm("Remove this entry?"))return;if(x.status==="received")state.currentCash-=x.type==="in"?x.dkkAmount:-x.dkkAmount;state.entries.splice(i,1);render()}function addPot(){
+function deleteEntry(id){const i=state.entries.findIndex(e=>e.id===id);if(i<0)return;const x=state.entries[i];if(!confirm("Remove this entry?"))return;applyReceivedEffect(x,-1);state.entries.splice(i,1);render()}function addPot(){
  const name=document.getElementById("newPotName").value.trim();
  const remaining=parseMoneyInput(document.getElementById("newPotAmount").value);
  const date=document.getElementById("newPotDate").value||"";
@@ -174,7 +231,6 @@ function editPot(id){
  document.getElementById("editPotId").value=id;
  document.getElementById("editPotName").value=x.name||"";
  document.getElementById("editPotAmount").value=fmt(x.remaining||0);
- document.getElementById("editPotUsed").value="";
  document.getElementById("editPotDate").value=x.date||"";
  openModal("potModal");
 }
@@ -182,10 +238,9 @@ function savePotEdit(){
  const id=Number(document.getElementById("editPotId").value);
  const x=state.pots.find(p=>p.id===id);if(!x)return;
  const editedRemaining=parseMoneyInput(document.getElementById("editPotAmount").value);
- const used=Math.abs(parseMoneyInput(document.getElementById("editPotUsed").value));
- if(editedRemaining<0||used<0){alert("Enter a positive amount.");return}
+ if(editedRemaining<0){alert("Enter a positive amount.");return}
  x.name=document.getElementById("editPotName").value.trim()||"Protected pot";
- x.remaining=Math.max(0,Math.round((editedRemaining-used)*100)/100);
+ x.remaining=Math.max(0,Math.round(editedRemaining*100)/100);
  x.date=document.getElementById("editPotDate").value||"";
  closeModal("potModal");render();
 }
@@ -194,13 +249,14 @@ function deletePot(id){
  if(!confirm("Remove this protected pot?"))return;
  state.pots.splice(i,1);render();
 }
-function saveManualToday(){state.manualToday=Number(document.getElementById("manualToday").value||0);render()}
+function saveManualToday(){state.adjustments[todayKey()]=parseMoneyInput(document.getElementById("manualToday").value);render()}
 function editCurrentBalance(){const value=prompt("What is in your account right now?",fmt(state.currentCash));if(value===null)return;state.currentCash=parseMoneyInput(value);render()}
-function saveSettings(){state.currentCash=Number(document.getElementById("currentCashInput").value||0);state.dailyBudget=Number(document.getElementById("dailyBudgetInput").value||0);state.weeklyBudget=Number(document.getElementById("weeklyBudgetInput").value||0);render()}
+function saveSettings(){state.currentCash=parseMoneyInput(document.getElementById("currentCashInput").value);state.adjustments[todayKey()]=parseMoneyInput(document.getElementById("manualToday").value);state.dailyBudget=parseMoneyInput(document.getElementById("dailyBudgetInput").value);state.weeklyBudget=parseMoneyInput(document.getElementById("weeklyBudgetInput").value);render()}
 function renderLedger(){const type=document.getElementById("filterType").value,status=document.getElementById("filterStatus").value,entries=[...state.entries].filter(x=>(type==="all"||x.type===type)&&(status==="all"||x.status===status)).sort((a,b)=>b.date.localeCompare(a.date));document.getElementById("ledgerList").innerHTML=entries.map(entryHTML).join("")||'<div class="tiny">No entries here yet.</div>'}function entryHTML(x){
  const original=x.currency!=="DKK"?`${fmt(x.originalAmount)} ${x.currency} · `:"";
  const rate=x.currency!=="DKK"?` · rate ${fmt(x.rate)} (${x.rateDate})`:"";
- return `<div class="item"><div class="item-main"><div class="item-title">${escapeHtml(x.name)}</div><div class="item-note">${prettyDate(x.date)} · ${escapeHtml(x.category)} · ${x.status}${rate}</div><div class="actions"><button class="ghost" onclick="toggleStatus(${x.id})">${x.status==="scheduled"?"Mark received/paid":"Move to scheduled"}</button><button class="ghost" onclick="editEntry(${x.id})">Edit</button><button class="danger" onclick="deleteEntry(${x.id})">Delete</button></div></div><div class="item-money ${x.type}">${x.type==="in"?"+":"−"}${original}${money(x.dkkAmount)}</div></div>`;
+ const pot=x.potId?state.pots.find(p=>String(p.id)===String(x.potId)):null,potText=pot?` · ${escapeHtml(pot.name)}`:"";
+ return `<div class="item"><div class="item-main"><div class="item-title">${escapeHtml(x.name)}</div><div class="item-note">${prettyDate(x.date)} · ${escapeHtml(x.category)} · ${x.status}${potText}${rate}</div><div class="actions"><button class="ghost" onclick="toggleStatus(${x.id})">${x.status==="scheduled"?"Mark received/paid":"Move to scheduled"}</button><button class="ghost" onclick="editEntry(${x.id})">Edit</button><button class="danger" onclick="deleteEntry(${x.id})">Delete</button></div></div><div class="item-money ${x.type}">${x.type==="in"?"+":"−"}${original}${money(x.dkkAmount)}</div></div>`;
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
 
@@ -214,16 +270,18 @@ function projectedGroups(){
  return Object.keys(grouped).sort().map(date=>({date,items:grouped[date]}));
 }
 function projectionStats(){
- const protectedTotal=state.pots.reduce((sum,p)=>sum+Number(p.remaining||0),0);
- let bank=Number(state.currentCash||0),free=bank-protectedTotal;
+ const protectedTotal=state.pots.reduce((sum,p)=>sum+Number(p.remaining||0),0),potBalances=new Map(state.pots.map(p=>[String(p.id),Number(p.remaining||0)]));
+ let bank=Number(state.currentCash||0),protectedRemaining=protectedTotal,free=bank-protectedRemaining;
  let lowestFree=free,lowestDate=todayKey();
  const rows=[];
  for(const group of projectedGroups()){
   const incoming=group.items.filter(x=>x.type==="in").reduce((a,x)=>a+Number(x.dkkAmount||0),0);
   const outgoing=group.items.filter(x=>x.type==="out").reduce((a,x)=>a+Number(x.dkkAmount||0),0);
-  bank+=incoming-outgoing;free=bank-protectedTotal;
+  bank+=incoming-outgoing;
+  group.items.filter(x=>x.type==="out"&&x.potId).forEach(x=>{const key=String(x.potId),before=potBalances.get(key)||0,after=Math.max(0,before-Number(x.dkkAmount||0));potBalances.set(key,after)});
+  protectedRemaining=[...potBalances.values()].reduce((a,n)=>a+n,0);free=bank-protectedRemaining;
   if(free<lowestFree){lowestFree=free;lowestDate=group.date}
-  rows.push({...group,incoming,outgoing,bank,free});
+  rows.push({...group,incoming,outgoing,bank,free,protectedRemaining});
  }
  return {rows,lowestFree,lowestDate,protectedTotal};
 }
@@ -257,6 +315,11 @@ function buildCashflowPeriods(){
 function nextReliefAfter(date){
  return state.entries.filter(x=>x.status==="scheduled"&&x.type==="in"&&x.date>=date).sort((a,b)=>a.date.localeCompare(b.date))[0]||null;
 }
+function projectedProtectedThrough(date){
+ const balances=new Map(state.pots.map(p=>[String(p.id),Number(p.remaining||0)]));
+ state.entries.filter(x=>x.status==="scheduled"&&x.type==="out"&&x.potId&&x.date<=date).sort((a,b)=>a.date.localeCompare(b.date)).forEach(x=>{const key=String(x.potId),before=balances.get(key)||0;balances.set(key,Math.max(0,before-Number(x.dkkAmount||0)))});
+ return [...balances.values()].reduce((sum,n)=>sum+n,0);
+}
 function renderCashflowPressure(){
  const stats=projectionStats();
  const periods=buildCashflowPeriods();
@@ -285,19 +348,20 @@ function renderThreeDayForecast(){
   const movement=events.reduce((sum,x)=>sum+(x.type==="in"?x.dkkAmount:-x.dkkAmount),0);
   const onDate=state.entries.filter(x=>x.status==="scheduled"&&x.date===date);
   const bank=Number(state.currentCash||0)-elapsed*Number(state.dailyBudget||0)+movement;
+  const free=bank-projectedProtectedThrough(date);
   const note=onDate.length?onDate.map(x=>`${x.type==="in"?"+":"−"}${fmt(x.dkkAmount)} ${escapeHtml(x.name)}`).join(" · "):(elapsed===0?"Today":`${elapsed} days of living pace`);
   const relief=onDate.some(x=>x.type==="in");
-  return `<div class="forecast-row ${relief?"relief":""}"><div class="forecast-date">${prettyDate(date).replace(/ 2026$/,"")}</div><div><strong>${elapsed===0?"Today":relief?"Money opens again":"Living pace"}</strong><div class="forecast-note">${note}</div></div><div class="forecast-balance">${money(bank)}<div class="forecast-note">in account</div></div></div>`;
+  return `<div class="forecast-row ${relief?"relief":""}"><div class="forecast-date">${prettyDate(date).replace(/ 2026$/,"")}</div><div><strong>${elapsed===0?"Today":relief?"Money opens again":"Living pace"}</strong><div class="forecast-note">${note}</div></div><div class="forecast-balance">${money(bank)}<div class="forecast-note">${money(free)} genuinely free</div></div></div>`;
  });
  document.getElementById("forecastList").innerHTML=rows.join("");
 }
 function render(){
  const used=usedToday();
  const protectedTotal=state.pots.reduce((sum,p)=>sum+Number(p.remaining||0),0);
- const freeCash=Math.max(0,state.currentCash-protectedTotal);
+ const freeCash=state.currentCash-protectedTotal;
  const available=Math.max(0,Math.min(state.dailyBudget-used,freeCash));
  const pct=Math.min(100,Math.round((used/state.dailyBudget)*100)||0);
- const weekUsed=used;
+ const weekUsed=usedThisWeek();
  const weekLeft=Math.max(0,Math.min(state.weeklyBudget-weekUsed,freeCash));
  document.getElementById("todayDate").textContent=new Intl.DateTimeFormat("en-GB",{weekday:"long",day:"numeric",month:"long"}).format(new Date());
  document.getElementById("currentBankHero").textContent=fmt(state.currentCash);
@@ -315,13 +379,14 @@ function render(){
  document.getElementById("daysLeft").textContent=daysRemainingInWeek();
  document.getElementById("weekProgress").style.width=Math.min(100,(weekUsed/state.weeklyBudget)*100)+"%";
  document.getElementById("todayUsedView").textContent=money(used);
- document.getElementById("manualToday").value=state.manualToday;
+ document.getElementById("todayLeftView").textContent=money(Math.max(0,state.dailyBudget-used));
+ document.getElementById("manualToday").value=adjustmentFor(todayKey());
  const today=receivedEntries().filter(x=>x.type==="out"&&x.date===todayKey());
- document.getElementById("todayList").innerHTML=today.map(entryHTML).join("")||'<div class="tiny">Today’s individual expenses will appear here.</div>';
+ document.getElementById("todayList").innerHTML=today.map(x=>`<div class="item"><div><div class="item-title">${escapeHtml(x.name)}</div><div class="item-note">${escapeHtml(x.category)}${x.potId?` · protected pot`:""}</div></div><div class="item-money out">−${money(x.dkkAmount)}</div></div>`).join("")||'<div class="tiny">Today’s individual expenses will appear here.</div>';
  const upcoming=state.entries.filter(x=>x.status==="scheduled").sort((a,b)=>(a.date||"9999").localeCompare(b.date||"9999"));
  document.getElementById("upcomingList").innerHTML=upcoming.map(entryHTML).join("")||'<div class="tiny">Everything scheduled has been completed.</div>';
  const sortedPots=[...state.pots].sort((a,b)=>(a.date||"9999").localeCompare(b.date||"9999"));
- document.getElementById("potsList").innerHTML=sortedPots.map(x=>`<div class="item"><div class="item-main"><div class="item-title">${escapeHtml(x.name)}</div><span class="due-pill">${prettyDate(x.date)}</span><div class="actions"><button class="ghost" onclick="editPot(${x.id})">Edit</button><button class="danger" onclick="deletePot(${x.id})">Delete</button></div></div><strong>${money(x.remaining)}</strong></div>`).join("")||'<div class="tiny">Add your first protected pot above.</div>';
+ document.getElementById("potsList").innerHTML=sortedPots.map(x=>{const days=x.date?Math.max(1,Math.round((dateObj(x.date)-dateObj(todayKey()))/86400000)+1):0,pace=days?Number(x.remaining||0)/days:0;return `<div class="item"><div class="item-main"><div class="item-title">${escapeHtml(x.name)}</div><span class="due-pill">${prettyDate(x.date)}</span>${days?`<div class="item-note">${money(pace)} per day · ${days} days</div>`:""}<div class="actions"><button class="ghost" onclick="editPot(${x.id})">Edit</button><button class="danger" onclick="deletePot(${x.id})">Delete</button></div></div><strong>${money(x.remaining)}</strong></div>`}).join("")||'<div class="tiny">Add your first protected pot above.</div>';
  const futureIn=upcoming.filter(x=>x.type==="in").reduce((s,x)=>s+x.dkkAmount,0);
  const futureOut=upcoming.filter(x=>x.type==="out").reduce((s,x)=>s+x.dkkAmount,0);
  const next7Out=upcoming.filter(x=>x.type==="out"&&x.date>=todayKey()&&x.date<=endOfNext7()).reduce((s,x)=>s+x.dkkAmount,0);
@@ -340,6 +405,7 @@ function render(){
  document.getElementById("currentCashInput").value=state.currentCash;
  document.getElementById("dailyBudgetInput").value=state.dailyBudget;
  document.getElementById("weeklyBudgetInput").value=state.weeklyBudget;
+ refreshPotMenus();
  renderLedger();renderCashflowPressure();renderThreeDayForecast();save();
 }
 function exportBackup(){const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="compass-backup.json";a.click();URL.revokeObjectURL(a.href)}
@@ -349,6 +415,6 @@ document.getElementById("restoreFile").addEventListener("change",async e=>{
  catch(err){alert("This backup file could not be restored.");}
  e.target.value="";
 });
-if("serviceWorker" in navigator)navigator.serviceWorker.register("./sw.js");
+if("serviceWorker" in navigator)navigator.serviceWorker.register("./sw.js").then(registration=>registration.update()).catch(()=>{});
 render();
 </script></body></html>
